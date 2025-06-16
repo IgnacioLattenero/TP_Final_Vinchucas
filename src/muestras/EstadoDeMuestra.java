@@ -1,7 +1,47 @@
 package muestras;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class EstadoDeMuestra {
 
-	public abstract void agregarVoto(Voto voto);
-	public abstract String resultadoActual();
+	public abstract void agregarVoto(Voto voto, Muestra muestra);
+	public abstract String resultadoActual(List<Voto> votos);
+	
+	
+	public String opinionMasVotadaEn(List<Voto> votos) {
+
+		//Contamos los votos y los enlistamos en un map (opinion, cantidadDeVotos)
+		Map<Opinion, Long> votosPorOpinion = votos.stream()
+					    						  .collect(Collectors.groupingBy(Voto::getOpinion, Collectors.counting()));
+
+		//Obtengo el numero maximo de votos
+		Long cantidadMaximaDeVotos = votosPorOpinion.values().stream()
+																	 .max();
+				
+		//Ahora busco las opiniones que tienen ese valor maximo
+		List<Opinion> masVotados = votosPorOpinion.entrySet().stream() //Convertimos en Stream el par clave/valor
+												  .filter(entry -> entry.getValue() == cantidadMaximaDeVotos) //filtramos por valor
+												  .map(Map.Entry::getKey) //Transforma cada entrada filtrada en su clave(Opinion).Ahora el stream es de tipo Stream<Opinion>.
+												  .collect(Collectors.toList());//Juntamos las opiniones mas votadas en una lista
+				
+		// Si hay más de una opinión con el máximo valor, hay empate y el resultado es "No definida"
+		if (masVotados.size() != 1) {
+		  return "No definida";
+		}
+
+	    // Devolver el nombre de la opinión que fue la mas votada
+		return masVotados.get(0).name();
+	}
+	
+	public List<Voto> votosExpertosEn(List<Voto> votos){
+		//Extraemos de la lista de votos, solo aquellos realizados por usuarios expertos/especialistas
+		return votos.stream()
+					.filter(v -> !v.getUsuario().getRangoUsuario().equals("BASICO"))//Todos los que no sean basicos
+					.toList();
+		
+	
+	}
+	
+			
 }
