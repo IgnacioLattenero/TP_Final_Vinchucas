@@ -4,13 +4,14 @@ import java.util.List;
 
 import muestras.Muestra;
 
+
 public class Mapa {
 	
 	//Atributos
 	private List<Muestra> muestras;
 	private List<ZonaDeCobertura> zonasDeCobertura;
 	
-	
+
 	//Metodos
 	public void agregarMuestra(Muestra muestra) {	
 		this.muestras.add(muestra);
