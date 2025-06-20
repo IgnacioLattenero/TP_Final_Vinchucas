@@ -39,16 +39,22 @@ public class Buscador {
 		 * en caso de que este vacia, devuelve la lista inicial de muestras.
 		 * 
 		 * */
+		
+		List<Muestra> muestrasFiltradas = new ArrayList<Muestra>();
+		
 		if (!this.getFiltros().isEmpty()) {
 			
-			return this.getFiltros().stream()
-							        .forEach(filtro -> filtro.filtrar(muestrasIniciales))
-									.toList();
+			
+			for (Filtro filtro : this.getFiltros()) {
+				
+				muestrasFiltradas = filtro.filtrar(muestrasIniciales);
+			}
 
 		} else {
 		
-			return muestrasIniciales;
+			return muestrasFiltradas;
 	}
+		return muestrasFiltradas;
 }
 
 

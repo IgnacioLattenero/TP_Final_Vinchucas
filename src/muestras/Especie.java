@@ -1,4 +1,4 @@
-package ManejoDeUsuarios;
+package muestras;
 
 public enum Especie {
 

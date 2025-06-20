@@ -21,10 +21,5 @@ public class Experto implements NivelDeUsuario {
 		
 	}
 
-	@Override
-	public Opinion votar(Opinion opinion) {
-	
-		return opinion.GUASAYANA;
-	}
 
 }

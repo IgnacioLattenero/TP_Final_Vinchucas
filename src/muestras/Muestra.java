@@ -1,8 +1,11 @@
 package muestras;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
+import ManejoDeUsuarios.Usuario;
+import ManejoDeUsuarios.Voto;
 import unidadGeografica.Ubicacion;
 
 public class Muestra {
@@ -16,15 +19,18 @@ public class Muestra {
 	private LocalDateTime fechaDeCreacion;
 	private EstadoDeMuestra estado;
 	private Ubicacion ubicacion;
+	private Especie especie;
 	
 	//Constructor
 	public Muestra (String foto, 
 					String cuestionario, 
 					Usuario publicador, 
 					Voto votoDelPublicador,
-					Ubicacion ubicacion) {
+					Ubicacion ubicacion,
+					Especie especie) {
 		
 		this.foto 		  = foto;
+		this.especie = especie;
 		this.cuestionario = cuestionario;
 		this.publicador   = publicador; 
 		
@@ -95,6 +101,11 @@ public class Muestra {
 	
 	public void setEstado(EstadoDeMuestra nuevoEstado) {
 		this.estado = nuevoEstado;
+	}
+
+	public Especie getEspecie() {
+		
+		return this.especie;
 	}
 	
 	

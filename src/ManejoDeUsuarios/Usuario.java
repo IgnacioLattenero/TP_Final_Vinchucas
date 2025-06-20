@@ -2,12 +2,16 @@ package ManejoDeUsuarios;
 
 import java.time.LocalDateTime;
 
+import muestras.Especie;
+import muestras.Muestra;
+import unidadGeografica.Ubicacion;
+
 public class Usuario {
 	
 	private NivelDeUsuario nivelDeUsuario;
 	private LocalDateTime antiguedadDelUsuario;
-	private int cantidadDeEnviosDeOpiniones;
-	private int cantidadDeRevisionesDeImagenes;
+	private int cantidadDeRevisiones;
+	private int cantidadDeEnviosDeMuestras;
 	
 	
 	public Usuario() {
@@ -26,11 +30,68 @@ public class Usuario {
 		this.nivelDeUsuario = nivel;
 	}
 	
-	public Opinion votar(Opinion opinion) {
+	public Voto votar(Opinion opinion) {
 		
-		this.nivelDeUsuario.votar(opinion);
-		this.cantidadDeEnviosDeOpiniones = cantidadDeEnviosDeOpiniones + 1;
-		this.cantidadDeRevisionesDeImagenes = cantidadDeRevisionesDeImagenes + 1;
+		this.cantidadDeRevisiones = cantidadDeRevisiones + 1;
 		
+		
+		return new Voto(opinion, this);
+	}
+	
+	public Muestra crearMuestra() {
+		
+		// crear una muestra: para testearlo, creo la muestra, digo usuario crear muestra y debe devolver la misma muestra que creé
+		
+		this.cantidadDeEnviosDeMuestras = cantidadDeEnviosDeMuestras + 1;
+		
+		return new Muestra(String foto, 
+						   String cuestionario, 
+						   Usuario publicador, 
+						   Voto votoDelPublicador,
+						   Ubicacion ubicacion,
+						   Especie especie);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

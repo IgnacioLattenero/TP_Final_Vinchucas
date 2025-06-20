@@ -9,11 +9,11 @@ public class Voto {
 	private Usuario votante;
 	private Opinion opinion;
 	
-	public Voto(Opinion opinion, Usuario votante, LocalDateTime fechaEmision) {
+	public Voto(Opinion opinion, Usuario votante) {
 		
 		this.opinion = opinion;
 		this.votante = votante;
-		this.fechaEmision = fechaEmision;
+		this.fechaEmision = LocalDateTime.now();
 		
 	}
 	
@@ -44,10 +44,6 @@ public class Voto {
 	        return Math.max(0, dias);
 	}
 	
-	public Opinion votar() {
-		
-		return this.opinion.GUASAYANA;
-	}
 }
 
 

@@ -18,10 +18,4 @@ public class Basico implements NivelDeUsuario {
 		
 	}
 
-	@Override
-	public Opinion votar(Opinion opinion) {
-		
-		return opinion.CHINCHEFOLIADA;
-	}
-
 }
