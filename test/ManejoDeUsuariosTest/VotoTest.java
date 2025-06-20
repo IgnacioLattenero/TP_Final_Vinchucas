@@ -28,15 +28,14 @@ class VotoTest {
 		
 		// SUT: Voto
 		
-		voto = new Voto(opinion, usuario, LocalDateTime.of(2025, 6, 1, 13, 0, 0));
+		voto = new Voto(opinion, usuario, LocalDateTime.of(2025, 6, 1, 13, 0, 0)); 
 		
-		when(opinion.getMensajeAsociado()).thenReturn("Se ha identificado una vinchuca de especie: ");
 	}
 
 	@Test
 	void votarTest() {
 		
-		assertEquals(opinion.getMensajeAsociado(), voto.votar());
+		assertEquals(opinion.GUASAYANA, voto.votar());
 	}
 	
 	@Test

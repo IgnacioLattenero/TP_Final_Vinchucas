@@ -44,9 +44,9 @@ public class Voto {
 	        return Math.max(0, dias);
 	}
 	
-	public String votar() {
+	public Opinion votar() {
 		
-		return this.opinion.getMensajeAsociado();
+		return this.opinion.GUASAYANA;
 	}
 }
 
