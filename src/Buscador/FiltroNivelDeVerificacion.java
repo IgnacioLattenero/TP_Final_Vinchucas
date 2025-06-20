@@ -5,7 +5,7 @@ import java.util.List;
 import muestras.EstadoDeMuestra;
 import muestras.Muestra;
 
-public class FiltroNivelDeVerificacion extends Filtro {
+public class FiltroNivelDeVerificacion implements Filtro {
 
 	private EstadoDeMuestra nivelDeVerificacion;
 	
@@ -13,15 +13,19 @@ public class FiltroNivelDeVerificacion extends Filtro {
 		
 		this.nivelDeVerificacion = nivelDeVerificacion;
 	}
+	
+	public EstadoDeMuestra getNivelDeVerificacion() {
+		
+		return this.nivelDeVerificacion;
+	}
 
 	@Override
-	protected List<Muestra> filtrar(List<Muestra> muestrasIniciales) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Muestra> filtrar(List<Muestra> muestrasIniciales) {
+		
+		
+		return muestrasIniciales.stream()
+								.filter(muestra -> muestra.getEstado().equals(this.getNivelDeVerificacion()))
+								.toList();
 	}
 	
-	public List<Muestra> filtrarPorNivel() {
-		
-		return null;
-	}
 }

@@ -23,7 +23,7 @@ public class FiltroTipoDeInsecto implements Filtro {
 	public List<Muestra> filtrar(List<Muestra> muestrasIniciales) {
 		
 		return muestrasIniciales.stream()
-								.filter(muestra -> muestra.getVotos().stream().findFirst(voto -> voto.getOpinion().equals(this.getTipoDeInsecto())))
+								.filter(muestra -> muestra.getEspecie().equals(this.getTipoDeInsecto()))
 								.toList();
 	}
 	
