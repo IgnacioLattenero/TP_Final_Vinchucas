@@ -3,16 +3,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import ManejoDeUsuarios.Voto;
+
 public class AbiertaATodaOpinion extends EstadoDeMuestra {
 
 	@Override
-	public void agregarVoto(Voto voto, Muestra muestra) {
+	public void agregarVoto(Voto voto, Muestra muestra) throws Exception {
 		
-		muestra.getVotos().add(voto);
+		if(muestra.getVotos().isEmpty()) {
+			muestra.getVotos().add(voto); //Si es vacia, este primer voto va a ser el mas actual
+		}else {
+			super.añadirVotoSegunAntiguedad(voto, muestra);
+		}
+	
 		
 		//Cambio de estado si hay al menos un experto
 		boolean hayUnExperto = muestra.getVotos().stream()
-												 .anyMatch(v -> !v.getUsuario().getRangoUsuario().equals("BASICO"));
+												 .anyMatch(v -> !v.getVotante().getRangoUsuario().equals("BASICO"));
 		if(hayUnExperto) {
 			muestra.setEstado(new VotanSoloExpertos());
 		}
@@ -21,8 +28,9 @@ public class AbiertaATodaOpinion extends EstadoDeMuestra {
 
 	@Override
 	public String resultadoActual(List<Voto> votos) {
-		
-		super.opinionMasVotadaEn(votos);
+		return super.opinionMasVotadaEn(votos);
 	}
+
+	
 
 }

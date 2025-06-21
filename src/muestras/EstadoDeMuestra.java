@@ -3,9 +3,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import ManejoDeUsuarios.Opinion;
+import ManejoDeUsuarios.Voto;
+
 public abstract class EstadoDeMuestra {
 
-	public abstract void agregarVoto(Voto voto, Muestra muestra);
+	public abstract void agregarVoto(Voto voto, Muestra muestra) throws Exception;
 	public abstract String resultadoActual(List<Voto> votos);
 	
 	
@@ -16,8 +19,7 @@ public abstract class EstadoDeMuestra {
 					    						  .collect(Collectors.groupingBy(Voto::getOpinion, Collectors.counting()));
 
 		//Obtengo el numero maximo de votos
-		Long cantidadMaximaDeVotos = votosPorOpinion.values().stream()
-																	 .max();
+		Long cantidadMaximaDeVotos = votosPorOpinion.values().stream().max();
 				
 		//Ahora busco las opiniones que tienen ese valor maximo
 		List<Opinion> masVotados = votosPorOpinion.entrySet().stream() //Convertimos en Stream el par clave/valor
@@ -37,11 +39,26 @@ public abstract class EstadoDeMuestra {
 	public List<Voto> votosExpertosEn(List<Voto> votos){
 		//Extraemos de la lista de votos, solo aquellos realizados por usuarios expertos/especialistas
 		return votos.stream()
-					.filter(v -> !v.getUsuario().getRangoUsuario().equals("BASICO"))//Todos los que no sean basicos
+					.filter(v -> !v.getVotante().getRangoUsuario().equals("BASICO"))//Todos los que no sean basicos
 					.toList();
 		
 	
 	}
 	
+	public void añadirVotoSegunAntiguedad(Voto voto, Muestra muestra) {
+		
+		if(elVotoEsElMasActualEn(voto, muestra)) {
+			muestra.getVotos().add(0, voto); // Va adelante (index 0) si es el mas actual
+		}else {
+			muestra.getVotos().add(voto); // Va al final si es el mas antiguo
 			
-}
+		}	
+	}
+	
+	public boolean elVotoEsElMasActualEn(Voto voto, Muestra muestra) {
+		
+		return muestra.getVotos().get(0).antiguedadEnDias() < voto.antiguedadEnDias();
+	}
+	
+	
+}//End_Class
