@@ -27,10 +27,10 @@ public class Muestra {
 					Usuario publicador, 
 					Voto votoDelPublicador,
 					Ubicacion ubicacion,
-					Especie especie) {
+					Especie especie) throws Exception {
 		
 		this.foto 		  = foto;
-		this.especie = especie;
+		this.especie 	  = especie;
 		this.cuestionario = cuestionario;
 		this.publicador   = publicador; 
 		
@@ -42,15 +42,15 @@ public class Muestra {
 		this.estado = new AbiertaATodaOpinion();
 		
 		//Añadimos entonces el voto del publicador (lo que puede cambiar el estado)
-		this.agregarVoto(votoDelPublicador);
+		this.agregarVoto(votoDelPublicador, this.votos);
 	}
 	
 	//Metodos
 	
-	public void agregarVoto(Voto voto,List<Voto> votos) {
+	public void agregarVoto(Voto voto,List<Voto> votos) throws Exception {
 		
-		if(!haVotado(voto.getUsuario())) {
-		  this.estado.agregarVoto(voto, votos);
+		if(!haVotado(voto.getVotante())) {
+		  this.estado.agregarVoto(voto, this);
 		}else {
 			throw new Exception("El Usuario ya ha votado antes en esta muestra!!!");
 		}	
@@ -60,13 +60,13 @@ public class Muestra {
 	
 	public String resultadoActual() {
 		
-		return this.estado.resultadoActual();
+		return this.estado.resultadoActual(this.votos);
 	}
 
 	public boolean haVotado(Usuario usuario) {
 		
 		return this.votos.stream()
-						 .anyMatch(v -> voto.getUsuario().equals(usuario));
+						 .anyMatch(v -> v.getVotante().equals(usuario));
 		
 	}
 	
