@@ -1,6 +1,94 @@
 package ManejoDeUsuarios;
 
-public interface NivelDeUsuario {
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
+
+import muestras.Muestra;
+
+public abstract class NivelDeUsuario {
 	
-	public void subirDeNivel(Usuario usuario);
+	public NivelDeUsuario() {
+		
+	}
+	
+	@Override
+	public abstract String toString();
+	
+	public abstract void subirDeNivel(List<Muestra> muestras, Usuario usuario);
+	
+	public boolean hizoMasDe10EnviosEn30Dias(List<Muestra> muestras, Usuario usuario) {
+		
+		long cantidadDeEnviosEn30Dias  = muestras.stream()
+                								 .filter(m -> m.getPublicador().equals(usuario))
+                								 .filter(m -> hayMenosDe30Dias(m.getFechaDeCreacion()))
+                								 .count();
+
+		return cantidadDeEnviosEn30Dias > 10;
+	}
+	
+	public boolean hizoMasDe20RevisionesEn30Dias(List<Muestra> muestras, Usuario usuario) {
+		
+		long cantidadDeRevisionesEn30Dias = muestras.stream()
+				   									.filter(m -> m.haVotado(usuario))
+				   									.filter(m -> hayMenosDe30Dias(m.getFechaDeCreacion()))
+				   									.count();
+
+		return cantidadDeRevisionesEn30Dias > 20;
+
+	}
+	
+	public boolean hayMenosDe30Dias(LocalDateTime fechaBuscada) {
+		
+		LocalDateTime fechaDeHoy = LocalDateTime.now(); 
+
+        long dias = ChronoUnit.DAYS.between(fechaBuscada, fechaDeHoy);
+        
+        return Math.max(0, dias) <= 30;
+	}
 }
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,6 +1,7 @@
 package ManejoDeUsuarios;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import muestras.Especie;
 import muestras.Muestra;
@@ -8,7 +9,7 @@ import unidadGeografica.Ubicacion;
 
 public class Usuario {
 	
-	private NivelDeUsuario nivelDeUsuario;
+	private NivelDeUsuario nivelDelUsuario;
 	private LocalDateTime antiguedadDelUsuario;
 	private int cantidadDeRevisiones;
 	private int cantidadDeEnviosDeMuestras;
@@ -16,18 +17,18 @@ public class Usuario {
 	
 	public Usuario() {
 		
-		this.nivelDeUsuario = nivelDeUsuario;
+		this.nivelDelUsuario = nivelDelUsuario;
 		this.antiguedadDelUsuario = antiguedadDelUsuario;
 	}
 	
-	public void subirDeNivel() {
+	public void subirDeNivel(List<Muestra> muestras) {
 		
-		this.nivelDeUsuario.subirDeNivel(this);
+		this.nivelDelUsuario.subirDeNivel(muestras, this);
 	}
 	
 	public void setNivel(NivelDeUsuario nivel) {
 		
-		this.nivelDeUsuario = nivel;
+		this.nivelDelUsuario = nivel;
 	}
 	
 	public Voto votar(Opinion opinion) {
@@ -38,18 +39,17 @@ public class Usuario {
 		return new Voto(opinion, this);
 	}
 	
-	public Muestra crearMuestra() {
+	public Muestra crearMuestra() throws Exception {
 		
-		// crear una muestra: para testearlo, creo la muestra, digo usuario crear muestra y debe devolver la misma muestra que creé
+		// TODO: crear una muestra: para testearlo, creo la muestra, digo usuario crear muestra y debe devolver la misma muestra que creé
 		
 		this.cantidadDeEnviosDeMuestras = cantidadDeEnviosDeMuestras + 1;
 		
-		return new Muestra(String foto, 
-						   String cuestionario, 
-						   Usuario publicador, 
-						   Voto votoDelPublicador,
-						   Ubicacion ubicacion,
-						   Especie especie);
+		return new Muestra("JPG", "cuantas viste?",
+				           new Usuario(),
+				           new Voto(Opinion.GUASAYANA, new Usuario()),
+				           new Ubicacion(5, 7),
+				           Especie.GUASAYANA);
 	}
 }
 

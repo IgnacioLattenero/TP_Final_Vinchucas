@@ -1,25 +1,31 @@
 package ManejoDeUsuarios;
 
-public class Experto implements NivelDeUsuario {
+import java.util.List;
+
+import muestras.Muestra;
+
+public class Experto extends NivelDeUsuario {
 
 	public Experto() {
 		
 	}
-	
-	
-	
+
 	@Override
-	public void subirDeNivel(Usuario usuario) {
+	public String toString() {
 		
-		if (usuario.cantidadDeEnvios() >= 10 && usuario.cantidadDeRevisiones() >= 20) {
-			
-			// no hace nada
-		} else {
-			usuario.setNivel(new Basico());
-		}
-		
-		
+		return "Experto";
 	}
 
+	@Override
+	public void subirDeNivel(List<Muestra> muestras, Usuario usuario) {
+		
+		if (!super.hizoMasDe10EnviosEn30Dias(muestras, usuario) ||
+			!super.hizoMasDe20RevisionesEn30Dias(muestras, usuario)) {
+
+				usuario.setNivel(new Basico());
+
+		}
+	
+	}
 
 }

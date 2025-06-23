@@ -1,21 +1,32 @@
 package ManejoDeUsuarios;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-public class Basico implements NivelDeUsuario {
+import muestras.Muestra;
+
+public class Basico extends NivelDeUsuario {
 	
 	public Basico() {
 	
 	}
 	
 	@Override
-	public void subirDeNivel(Usuario usuario) {
+	public void subirDeNivel(List<Muestra> muestras, Usuario usuario) {
 		
-		if (usuario.cantidadDeEnvios() >= 10 && usuario.cantidadDeRevisiones() >= 20) {
-			
-			usuario.setNivel(new Experto());
+		if (super.hizoMasDe10EnviosEn30Dias(muestras, usuario) &&
+			super.hizoMasDe20RevisionesEn30Dias(muestras, usuario)) {
+
+				usuario.setNivel(new Experto());
+
 		}
-		
 	}
+
+	@Override
+	public String toString() {
+		
+		return "Basico";
+	}
+
 
 }

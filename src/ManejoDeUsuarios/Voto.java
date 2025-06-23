@@ -27,14 +27,17 @@ public class Voto {
 		return this.fechaEmision;
 	}
 	
+	public Opinion getOpinion() {
+		
+		return this.opinion;
+	}
+	
 	public long antiguedadEnDias() { // long representa a los días
 		
 		 /**
-	     * Calcula la antigüedad del voto en días completos transcurridos desde su emisión hasta hoy.
-	     *
-	     * @return La cantidad de días transcurridos. Si el voto es de hoy o del futuro, retorna 0.
+	     * calcula la cantidad de días desde la emisión del voto hasta el día de hoy
 	     */
-	        LocalDateTime fechaDeHoy = LocalDateTime.now(); // es la fecha de hoy
+	        LocalDateTime fechaDeHoy = LocalDateTime.now(); 
 
 	        // Usamos ChronoUnit.DAYS.between() para calcular la diferencia en días.
 	        long dias = ChronoUnit.DAYS.between(this.getFechaEmision(), fechaDeHoy);
