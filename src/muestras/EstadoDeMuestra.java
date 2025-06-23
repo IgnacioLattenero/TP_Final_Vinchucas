@@ -1,6 +1,8 @@
 package muestras;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import ManejoDeUsuarios.Opinion;
@@ -19,11 +21,14 @@ public abstract class EstadoDeMuestra {
 					    						  .collect(Collectors.groupingBy(Voto::getOpinion, Collectors.counting()));
 
 		//Obtengo el numero maximo de votos
-		Long cantidadMaximaDeVotos = votosPorOpinion.values().stream().max();
-				
+		Optional<Long> cantidadMaximaDeVotos = votosPorOpinion.values().stream().max(Comparator.naturalOrder());
+		
+		//Pasar a Long con 0L como valor por defecto si no hay votos
+		Long maxVotos = cantidadMaximaDeVotos.orElse(0L);
+		
 		//Ahora busco las opiniones que tienen ese valor maximo
 		List<Opinion> masVotados = votosPorOpinion.entrySet().stream() //Convertimos en Stream el par clave/valor
-												  .filter(entry -> entry.getValue() == cantidadMaximaDeVotos) //filtramos por valor
+												  .filter(entry -> entry.getValue() == maxVotos) //filtramos por valor
 												  .map(Map.Entry::getKey) //Transforma cada entrada filtrada en su clave(Opinion).Ahora el stream es de tipo Stream<Opinion>.
 												  .collect(Collectors.toList());//Juntamos las opiniones mas votadas en una lista
 				
@@ -39,7 +44,7 @@ public abstract class EstadoDeMuestra {
 	public List<Voto> votosExpertosEn(List<Voto> votos){
 		//Extraemos de la lista de votos, solo aquellos realizados por usuarios expertos/especialistas
 		return votos.stream()
-					.filter(v -> !v.getVotante().getRangoUsuario().equals("BASICO"))//Todos los que no sean basicos
+					.filter(v -> !v.getVotante().getNivelDeUsuario().toString().equals("Basico"))//Todos los que no sean basicos
 					.toList();
 		
 	

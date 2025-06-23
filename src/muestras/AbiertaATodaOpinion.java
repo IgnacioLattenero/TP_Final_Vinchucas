@@ -19,7 +19,7 @@ public class AbiertaATodaOpinion extends EstadoDeMuestra {
 		
 		//Cambio de estado si hay al menos un experto
 		boolean hayUnExperto = muestra.getVotos().stream()
-												 .anyMatch(v -> !v.getVotante().getRangoUsuario().equals("BASICO"));
+												 .anyMatch(v -> !v.getVotante().getNivelDeUsuario().toString().equals("Basico"));
 		if(hayUnExperto) {
 			muestra.setEstado(new VotanSoloExpertos());
 		}
