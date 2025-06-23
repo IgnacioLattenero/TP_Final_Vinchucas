@@ -26,6 +26,11 @@ public class Usuario {
 		this.nivelDelUsuario.subirDeNivel(muestras, this);
 	}
 	
+	public NivelDeUsuario getNivelDeUsuario() {
+	
+		return this.nivelDelUsuario;
+	}
+	
 	public void setNivel(NivelDeUsuario nivel) {
 		
 		this.nivelDelUsuario = nivel;
