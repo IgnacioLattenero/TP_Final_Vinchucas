@@ -8,9 +8,6 @@ import muestras.Muestra;
 
 public abstract class NivelDeUsuario {
 	
-	public NivelDeUsuario() {
-		
-	}
 	
 	@Override
 	public abstract String toString();
@@ -46,6 +43,15 @@ public abstract class NivelDeUsuario {
         
         return Math.max(0, dias) <= 30;
 	}
+	
+	@Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;  // Contra la misma instancia da true
+        if (obj == null) return false; // Contra null da false
+        return this.getClass() == obj.getClass(); //Si son la misma clase son iguales
+    }
+	
+	
 }
 	
 

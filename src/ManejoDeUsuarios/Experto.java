@@ -6,9 +6,6 @@ import muestras.Muestra;
 
 public class Experto extends NivelDeUsuario {
 
-	public Experto() {
-		
-	}
 
 	@Override
 	public String toString() {

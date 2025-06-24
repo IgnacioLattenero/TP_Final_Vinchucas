@@ -10,15 +10,12 @@ import unidadGeografica.Ubicacion;
 public class Usuario {
 	
 	private NivelDeUsuario nivelDelUsuario;
-	private LocalDateTime antiguedadDelUsuario;
-	private int cantidadDeRevisiones;
-	private int cantidadDeEnviosDeMuestras;
+
 	
-	
-	public Usuario() {
+	public Usuario(NivelDeUsuario nivelDelUsuario) {
 		
 		this.nivelDelUsuario = nivelDelUsuario;
-		this.antiguedadDelUsuario = antiguedadDelUsuario;
+
 	}
 	
 	public void subirDeNivel(List<Muestra> muestras) {
@@ -38,23 +35,19 @@ public class Usuario {
 	
 	public Voto votar(Opinion opinion) {
 		
-		this.cantidadDeRevisiones = cantidadDeRevisiones + 1;
-		
-		
+
 		return new Voto(opinion, this);
 	}
 	
-	public Muestra crearMuestra() throws Exception {
+	public Muestra crearMuestra(String foto,
+			String cuestionario,
+			Usuario usuario,
+			Voto voto,
+			Ubicacion ubicacion,
+			Especie especie) throws Exception {
+
 		
-		// TODO: crear una muestra: para testearlo, creo la muestra, digo usuario crear muestra y debe devolver la misma muestra que creé
-		
-		this.cantidadDeEnviosDeMuestras = cantidadDeEnviosDeMuestras + 1;
-		
-		return new Muestra("JPG", "cuantas viste?",
-				           new Usuario(),
-				           new Voto(Opinion.GUASAYANA, new Usuario()),
-				           new Ubicacion(5, 7),
-				           Especie.GUASAYANA);
+		return new Muestra(foto, cuestionario, usuario, voto, ubicacion, especie);
 	}
 }
 

@@ -43,6 +43,7 @@ public abstract class EstadoDeMuestra {
 	
 	public List<Voto> votosExpertosEn(List<Voto> votos){
 		//Extraemos de la lista de votos, solo aquellos realizados por usuarios expertos/especialistas
+		//TODO: ACA NO ES GetVotante, debo tener el rango del usuario (atributo en voto)
 		return votos.stream()
 					.filter(v -> !v.getVotante().getNivelDeUsuario().toString().equals("Basico"))//Todos los que no sean basicos
 					.toList();
