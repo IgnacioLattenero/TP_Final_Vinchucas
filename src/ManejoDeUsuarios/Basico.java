@@ -7,9 +7,7 @@ import muestras.Muestra;
 
 public class Basico extends NivelDeUsuario {
 	
-	public Basico() {
-	
-	}
+
 	
 	@Override
 	public void subirDeNivel(List<Muestra> muestras, Usuario usuario) {

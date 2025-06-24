@@ -8,6 +8,7 @@ public class Voto {
 	private LocalDateTime fechaEmision;
 	private Usuario votante;
 	private Opinion opinion;
+	private NivelDeUsuario nivelDelVotante;
 	
 	public Voto(Opinion opinion, Usuario votante) {
 		
@@ -15,6 +16,9 @@ public class Voto {
 		this.votante = votante;
 		this.fechaEmision = LocalDateTime.now();
 		
+		// Almacenamos el nivel del votante en el voto para que no cambie
+		// si el votante cambia de rango.
+		this.nivelDelVotante = votante.getNivelDeUsuario();
 	}
 	
 	public Usuario getVotante() {
@@ -32,6 +36,10 @@ public class Voto {
 		return this.opinion;
 	}
 	
+	public NivelDeUsuario getNivelDelVotante() {
+		return this.nivelDelVotante;
+	}
+	
 	public long antiguedadEnDias() { // long representa a los días
 		
 		 /**
@@ -46,6 +54,7 @@ public class Voto {
 	        // si la fecha de emisión fuera posterior a la fecha actual (lo cual no debería pasar para un voto real).
 	        return Math.max(0, dias);
 	}
+	
 	
 }
 
