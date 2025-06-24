@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import ManejoDeUsuarios.Basico;
 import ManejoDeUsuarios.Opinion;
 import ManejoDeUsuarios.Voto;
 
@@ -11,8 +12,8 @@ public class VotanSoloExpertos extends EstadoDeMuestra {
 
 	@Override
 	public void agregarVoto(Voto voto, Muestra muestra) throws Exception {
-		if(!voto.getVotante().equals("BASICO")) { //TODO: MAL Y FEA CONDICION AQUI (repensar)
-			super.añadirVotoSegunAntiguedad(voto, muestra); //ESTO SE QUEDA!
+		if(!voto.getNivelDelVotante().equals(new Basico())) { 
+			super.añadirVotoSegunAntiguedad(voto, muestra); 
 		}else {
 			throw new Exception("Solo pueden votar los expertos!!!");
 		}

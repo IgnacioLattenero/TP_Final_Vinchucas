@@ -3,6 +3,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import ManejoDeUsuarios.Basico;
 import ManejoDeUsuarios.Voto;
 
 public class AbiertaATodaOpinion extends EstadoDeMuestra {
@@ -18,14 +19,19 @@ public class AbiertaATodaOpinion extends EstadoDeMuestra {
 	
 		
 		//Cambio de estado si hay al menos un experto
-		boolean hayUnExperto = muestra.getVotos().stream()
-												 .anyMatch(v -> !v.getVotante().getNivelDeUsuario().toString().equals("Basico"));
-		if(hayUnExperto) {
+
+		if(esVotoDeExperto(voto)) {
 			muestra.setEstado(new VotanSoloExpertos());
 		}
 		
 	}
 
+	public boolean esVotoDeExperto(Voto voto) {
+		//Si el voto no es basico, entonces es experto
+		return !voto.getNivelDelVotante().equals(new Basico());
+	}
+	
+	
 	@Override
 	public String resultadoActual(List<Voto> votos) {
 		return super.opinionMasVotadaEn(votos);

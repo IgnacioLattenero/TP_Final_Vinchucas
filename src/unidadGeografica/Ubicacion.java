@@ -5,8 +5,8 @@ import java.util.List;
 public class Ubicacion {
 	
 	//Atributos
-	private double latitud;
-	private double longitud;
+	private int latitud;
+	private int longitud;
 	
 	
 	//Constructor
@@ -47,13 +47,7 @@ public class Ubicacion {
 		return this.longitud;
 	}
 	
-	public void setLatitud(double nuevaLatitud) {
-		this.latitud = nuevaLatitud;
-	}
 	
-	public void setLongitud(double nuevaLongitud) {
-		this.longitud = nuevaLongitud;
-	}
 	
 	
 	
