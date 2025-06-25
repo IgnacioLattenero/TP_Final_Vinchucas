@@ -10,10 +10,10 @@ public class Basico extends NivelDeUsuario {
 
 	
 	@Override
-	public void subirDeNivel(List<Muestra> muestras, Usuario usuario) {
+	public void cambiarNivelDelUsuario(List<Muestra> muestras, Usuario usuario) {
 		
-		if (super.hizoMasDe10EnviosEn30Dias(muestras, usuario) &&
-			super.hizoMasDe20RevisionesEn30Dias(muestras, usuario)) {
+		if (super.hizoMasDe10EnviosEnLosUltimos30Dias(muestras, usuario) &&
+			super.hizoMasDe20RevisionesEnLosUltimos30Dias(muestras, usuario)) {
 
 				usuario.setNivel(new Experto());
 
