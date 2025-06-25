@@ -14,7 +14,7 @@ public class Especialista extends NivelDeUsuario {
 	}
 
 	@Override
-	public void subirDeNivel(List<Muestra> muestras, Usuario usuario) {
+	public void cambiarNivelDelUsuario(List<Muestra> muestras, Usuario usuario) {
 		
 		/**
 		 * Este método no hace nada, ya que un especialista nunca pierde su nivel

@@ -20,7 +20,7 @@ public class Usuario {
 	
 	public void subirDeNivel(List<Muestra> muestras) {
 		
-		this.nivelDelUsuario.subirDeNivel(muestras, this);
+		this.nivelDelUsuario.cambiarNivelDelUsuario(muestras, this);
 	}
 	
 	public NivelDeUsuario getNivelDeUsuario() {
@@ -40,11 +40,11 @@ public class Usuario {
 	}
 	
 	public Muestra crearMuestra(String foto,
-			String cuestionario,
-			Usuario usuario,
-			Voto voto,
-			Ubicacion ubicacion,
-			Especie especie) throws Exception {
+								String cuestionario,
+								Usuario usuario,
+								Voto voto,
+								Ubicacion ubicacion,
+								Especie especie) throws Exception {
 
 		
 		return new Muestra(foto, cuestionario, usuario, voto, ubicacion, especie);
