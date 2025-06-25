@@ -28,7 +28,7 @@ public class FiltroFechaDeUltimaVotacion implements Filtro {
 		 * */
 		
 		return muestrasIniciales.stream()
-								.filter(muestra -> muestra.getVotos().getFirst().equals(this.getFechaDeVotacionBuscada()))
+								.filter(muestra -> muestra.getVotos().getFirst().getFechaEmision().equals(this.getFechaDeVotacionBuscada()))
 								.toList();
 								
 	}

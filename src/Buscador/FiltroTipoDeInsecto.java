@@ -2,19 +2,19 @@ package Buscador;
 
 import java.util.List;
 
-import ManejoDeUsuarios.Opinion;
+import muestras.Especie;
 import muestras.Muestra;
 
 public class FiltroTipoDeInsecto implements Filtro {
 	
-	private Opinion tipoDeInsecto;
+	private Especie tipoDeInsecto;
 	
-	public FiltroTipoDeInsecto(Opinion tipoDeInsecto) {
+	public FiltroTipoDeInsecto(Especie tipoDeInsecto) {
 		
 		this.tipoDeInsecto = tipoDeInsecto;
 	}
 	
-	public Opinion getTipoDeInsecto() {
+	public Especie getTipoDeInsecto() {
 		
 		return this.tipoDeInsecto;
 	}

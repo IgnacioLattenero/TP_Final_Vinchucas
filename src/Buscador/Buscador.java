@@ -33,31 +33,67 @@ public class Buscador {
 	}
 	
 	public List<Muestra> buscar(List<Muestra> muestrasIniciales) {
-		
-		/**
-		 * verifica que la lista de filtros no esté vacia para buscar las muestras,
-		 * en caso de que este vacia, devuelve la lista inicial de muestras.
-		 * 
-		 * */
-		
-		List<Muestra> muestrasFiltradas = new ArrayList<Muestra>();
-		
-		if (!this.getFiltros().isEmpty()) {
-			
-			
-			for (Filtro filtro : this.getFiltros()) {
-				
-				muestrasFiltradas = filtro.filtrar(muestrasIniciales);
-			}
 
-		} else {
-		
-			return muestrasFiltradas;
-	}
-		return muestrasFiltradas;
+        /**
+         * Si la lista de filtros está vacía, devuelve la lista inicial de muestras, 
+         * es decir, no se filtra nada, luego, se inicializa el recorrido con 
+         * todas las muestras, y se aplica cada filtro sobre el resultado del filtro anterior, 
+         * acotando la lista final, hasta la resultante.
+         * */ 
+        if (this.getFiltros().isEmpty()) {
+            return muestrasIniciales; // Si no hay filtros, no se filtra nada.
+        }
+
+        List<Muestra> muestrasResultantes = new ArrayList<>(muestrasIniciales); // Inicializamos con todas las muestras
+
+        // Aplicamos cada filtro sobre el resultado del filtro anterior.
+        for (Filtro filtro : this.getFiltros()) {
+            muestrasResultantes = filtro.filtrar(muestrasResultantes);
+        }
+
+        return muestrasResultantes;
+    }
 }
 
 
 
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -2,6 +2,7 @@ package Buscador;
 
 import java.util.ArrayList;
 import java.util.List;
+import static org.mockito.Mockito.*;
 
 import muestras.Muestra;
 
