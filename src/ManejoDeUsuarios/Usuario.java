@@ -18,7 +18,7 @@ public class Usuario {
 
 	}
 	
-	public void subirDeNivel(List<Muestra> muestras) {
+	public void cambiarNivelDelUsuario(List<Muestra> muestras) {
 		
 		this.nivelDelUsuario.cambiarNivelDelUsuario(muestras, this);
 	}

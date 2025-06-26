@@ -59,4 +59,11 @@ public class ZonaDeCobertura implements Subject {
 		this.observadores.stream().forEach(observador -> observador.updateAltaMuestra(this, muestra));
 	}
 	
+	public Ubicacion getEpicentro() {
+		return this.epicentro;
+	}
+	
+	public int getRadio() {
+		return this.radio;
+	}
 }
