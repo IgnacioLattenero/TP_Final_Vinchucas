@@ -9,9 +9,6 @@ import muestras.Muestra;
 public abstract class NivelDeUsuario {
 	
 	
-	@Override
-	public abstract String toString();
-	
 	public abstract void cambiarNivelDelUsuario(List<Muestra> muestras, Usuario usuario);
 	
 	public boolean hizoMasDe10EnviosEnLosUltimos30Dias(List<Muestra> muestras, Usuario usuario) {

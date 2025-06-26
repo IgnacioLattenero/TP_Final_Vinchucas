@@ -7,8 +7,6 @@ import muestras.Muestra;
 
 public class Basico extends NivelDeUsuario {
 	
-
-	
 	@Override
 	public void cambiarNivelDelUsuario(List<Muestra> muestras, Usuario usuario) {
 		
@@ -19,12 +17,5 @@ public class Basico extends NivelDeUsuario {
 
 		}
 	}
-
-	@Override
-	public String toString() {
-		
-		return "Basico";
-	}
-
 
 }
