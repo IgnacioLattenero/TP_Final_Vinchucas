@@ -38,7 +38,7 @@ public class AppWeb {
 	}
 		
 	public void ubicarEnZonaSiCorresponde(Muestra muestra) {
-		//Agregamos las muestras a la zona correspondiente
+		// Filtra la zona (o las zonas) a la que puede pertenecer la muestra y la agrega. 
 		// Una muestra pertenece a una zona si la distancia de su ubicacion al epicentro de la zona es menor al radio de dicha zona.
 		zonasDeCobertura.stream()
 						.filter(zona -> zona.getEpicentro().distanciaA(muestra.getUbicacion()) < zona.getRadio())
@@ -67,6 +67,5 @@ public class AppWeb {
 	public void agregarOrganizacion(Organizacion organizacion) {
 		this.organizaciones.add(organizacion);
 	}
-	
 	
 }
