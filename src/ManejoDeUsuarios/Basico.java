@@ -20,11 +20,7 @@ public class Basico extends NivelDeUsuario {
 		}
 	}
 
-	@Override
-	public String toString() {
-		
-		return "Basico";
-	}
+	
 
 
 }
