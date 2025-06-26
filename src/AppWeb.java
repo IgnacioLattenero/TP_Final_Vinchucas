@@ -39,7 +39,7 @@ public class AppWeb {
 		
 	public void ubicarEnZonaSiCorresponde(Muestra muestra) {
 		//Agregamos las muestras a la zona correspondiente
-		// Una muestra pertenece a una zona su distancia al epicentro es menor al radio de la zona.
+		// Una muestra pertenece a una zona si la distancia de su ubicacion al epicentro de la zona es menor al radio de dicha zona.
 		zonasDeCobertura.stream()
 						.filter(zona -> zona.getEpicentro().distanciaA(muestra.getUbicacion()) < zona.getRadio())
 						.forEach(zona -> zona.addMuestra(muestra));		
