@@ -65,7 +65,7 @@ class FiltroNivelDeVerificacionTest {
 	@Test
 	void filtrarTest() {
 		
-		 List<Muestra> resultadoFiltro = filtroNivelDeVerificacion.filtrar(muestrasOriginales);
+		 List<Muestra> resultadoFiltro = filtroNivelDeVerificacion.buscar(muestrasOriginales);
 	        
 	     assertEquals(muestrasEsperadas.size(), resultadoFiltro.size());
 	     assertTrue(resultadoFiltro.containsAll(muestrasEsperadas));

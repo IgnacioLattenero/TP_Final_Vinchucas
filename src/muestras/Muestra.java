@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import ManejoDeUsuarios.Opinion;
 import ManejoDeUsuarios.Usuario;
 import ManejoDeUsuarios.Voto;
 import unidadGeografica.Ubicacion;
@@ -19,7 +20,7 @@ public class Muestra {
 	private LocalDateTime fechaDeCreacion;
 	private EstadoDeMuestra estado;
 	private Ubicacion ubicacion;
-	private Especie especie;
+	private Opinion especie;
 	
 	//Constructor
 	public Muestra (String foto, 
@@ -27,7 +28,7 @@ public class Muestra {
 					Usuario publicador, 
 					Voto votoDelPublicador,
 					Ubicacion ubicacion,
-					Especie especie) throws Exception {
+					Opinion especie) throws Exception {
 		
 		this.foto 		  = foto;
 		this.especie 	  = especie;
@@ -53,7 +54,7 @@ public class Muestra {
 		  this.estado.agregarVoto(voto, this);
 		}else {
 			throw new Exception("El Usuario ya ha votado antes en esta muestra!!!");
-		}	
+		}	 
 
 	}
 
@@ -103,7 +104,7 @@ public class Muestra {
 		this.estado = nuevoEstado;
 	}
 
-	public Especie getEspecie() {
+	public Opinion getEspecie() {
 		
 		return this.especie;
 	}

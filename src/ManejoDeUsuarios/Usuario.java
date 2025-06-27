@@ -3,7 +3,6 @@ package ManejoDeUsuarios;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import muestras.Especie;
 import muestras.Muestra;
 import unidadGeografica.Ubicacion;
 
@@ -44,7 +43,7 @@ public class Usuario {
 								Usuario usuario,
 								Voto voto,
 								Ubicacion ubicacion,
-								Especie especie) throws Exception {
+								Opinion especie) throws Exception {
 
 		
 		return new Muestra(foto, cuestionario, usuario, voto, ubicacion, especie);

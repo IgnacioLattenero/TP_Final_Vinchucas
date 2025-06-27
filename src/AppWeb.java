@@ -10,25 +10,26 @@ import observer.ZonaDeCobertura;
 
 public class AppWeb {
 
-	private Buscador buscador;
 	private List<Usuario> usuarios;
 	private List<Muestra> muestras;
 	private List<ZonaDeCobertura> zonasDeCobertura;
-	private List<Organizacion> organizaciones;
+		
 	
-	
-	
+	public AppWeb(List<Usuario> usuarios, List<Muestra> muestras,
+			List<ZonaDeCobertura> zonasDeCobertura) {
+		super();
+		this.usuarios = usuarios;
+		this.muestras = muestras;
+		this.zonasDeCobertura = zonasDeCobertura;
+	}
+
 	//Metodos
 	public void nivelarUsuarios() {
 		this.usuarios.stream().forEach(u -> u.cambiarNivelDelUsuario(muestras));
 	}
 	
-	public List<Muestra> realizarBusqueda(){
-		return this.buscador.buscar(this.muestras);
-	}
-	
-	public void establecerFiltro(Filtro filtro) {
-		this.buscador.agregarFiltro(filtro);
+	public List<Muestra> realizarBusqueda(Filtro filtro){
+		return filtro.buscar(this.muestras);
 	}
 	
 	
@@ -64,8 +65,5 @@ public class AppWeb {
 		this.usuarios.add(usuario);
 	}
 	
-	public void agregarOrganizacion(Organizacion organizacion) {
-		this.organizaciones.add(organizacion);
-	}
 	
 }

@@ -1,32 +1,26 @@
 package Buscador;
 
-import java.util.List;
-
-import muestras.Especie;
+import ManejoDeUsuarios.Opinion;
 import muestras.Muestra;
 
-public class FiltroTipoDeInsecto implements Filtro {
+public class FiltroTipoDeInsecto extends Filtro {
 	
-	private Especie tipoDeInsecto;
+	private Opinion tipoDeInsecto;
 	
-	public FiltroTipoDeInsecto(Especie tipoDeInsecto) {
+	public FiltroTipoDeInsecto(Opinion tipoDeInsecto) {
 		
 		this.tipoDeInsecto = tipoDeInsecto;
 	}
 	
-	public Especie getTipoDeInsecto() {
+	public Opinion getTipoDeInsecto() {
 		
 		return this.tipoDeInsecto;
 	}
 
 	@Override
-	public List<Muestra> filtrar(List<Muestra> muestrasIniciales) {
+	public boolean pasaFiltro(Muestra muestra) {
 		
-		return muestrasIniciales.stream()
-								.filter(muestra -> muestra.getEspecie().equals(this.getTipoDeInsecto()))
-								.toList();
+		return muestra.getEspecie().equals(this.getTipoDeInsecto());
 	}
-	
-	
 
 }

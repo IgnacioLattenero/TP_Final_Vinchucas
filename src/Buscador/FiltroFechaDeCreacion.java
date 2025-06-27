@@ -5,7 +5,7 @@ import java.util.List;
 
 import muestras.Muestra;
 
-public class FiltroFechaDeCreacion implements Filtro {
+public class FiltroFechaDeCreacion extends Filtro {
 
 	private LocalDateTime fechaDeCreacion;
 	
@@ -19,14 +19,11 @@ public class FiltroFechaDeCreacion implements Filtro {
 		
 		return this.fechaDeCreacion;
 	}
-	 
+
 	@Override
-	public List<Muestra> filtrar(List<Muestra> muestrasIniciales) {
+	public boolean pasaFiltro(Muestra muestra) {
 		
-		return muestrasIniciales.stream()
-								.filter(muestra -> muestra.getFechaDeCreacion().equals(this.getFechaDeCreacion()))
-								.toList();
+		return muestra.getFechaDeCreacion().equals(this.getFechaDeCreacion());
 	}
 	
-
 }

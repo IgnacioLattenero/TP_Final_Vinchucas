@@ -13,9 +13,8 @@ import org.junit.jupiter.api.Test;
 import Buscador.Filtro;
 import Buscador.FiltroAnd;
 import Buscador.FiltroFechaDeCreacion;
-import Buscador.FiltroFechaDeUltimaVotacion;
 import Buscador.FiltroTipoDeInsecto;
-import muestras.Especie;
+import ManejoDeUsuarios.Opinion;
 import muestras.Muestra;
 
 class FiltroAndTest {
@@ -38,7 +37,7 @@ class FiltroAndTest {
 	@BeforeEach
 	public void setUp() throws Exception {
 		 
-		filtroTipoDeInsecto = new FiltroTipoDeInsecto(Especie.SORDIDA);
+		filtroTipoDeInsecto = new FiltroTipoDeInsecto(Opinion.SORDIDA);
 		fechaBuscada = LocalDateTime.of(2025, 6, 20, 13, 0, 0);
 		otraFecha = LocalDateTime.of(2025, 1, 1, 14, 0, 0);
 		filtroFechaDeCreacion = new FiltroFechaDeCreacion(fechaBuscada);
@@ -60,10 +59,10 @@ class FiltroAndTest {
 
 		filtroAnd = new FiltroAnd(filtroTipoDeInsecto, filtroFechaDeCreacion);
 		
-		when(sordida.getEspecie()).thenReturn(Especie.SORDIDA);
-		when(guasayana.getEspecie()).thenReturn(Especie.GUASAYANA);
-		when(infestans.getEspecie()).thenReturn(Especie.INFESTANS);
-		when(infestans2.getEspecie()).thenReturn(Especie.INFESTANS);
+		when(sordida.getEspecie()).thenReturn(Opinion.SORDIDA);
+		when(guasayana.getEspecie()).thenReturn(Opinion.GUASAYANA);
+		when(infestans.getEspecie()).thenReturn(Opinion.INFESTANS);
+		when(infestans2.getEspecie()).thenReturn(Opinion.INFESTANS);
 		
 		when(sordida.getFechaDeCreacion()).thenReturn(fechaBuscada);
 		when(guasayana.getFechaDeCreacion()).thenReturn(otraFecha);
@@ -74,7 +73,7 @@ class FiltroAndTest {
 	@Test
 	void filtrarTest() {
 		
-		 List<Muestra> resultadoFiltro = filtroAnd.filtrar(muestrasIniciales);
+		 List<Muestra> resultadoFiltro = filtroAnd.buscar(muestrasIniciales);
 	        
 	     assertEquals(muestrasEsperadas.size(), resultadoFiltro.size());
 	     assertTrue(resultadoFiltro.containsAll(muestrasEsperadas));
