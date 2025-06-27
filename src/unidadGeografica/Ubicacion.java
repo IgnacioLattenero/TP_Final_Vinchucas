@@ -32,18 +32,18 @@ public class Ubicacion {
 	public List<Ubicacion> ubicacionesEn_AMenosDe_(List<Ubicacion> ubicaciones, double distanciaKm){
 		
 		return ubicaciones.stream()
-						  .filter(u -> u.distanciaA(this) <= distanciaKm)
+						  .filter(u -> this.distanciaA(u) <= distanciaKm)
 						  .toList();
 		
 		
 	}
 	
 	//Getters and setters
-	public double getLatitud() {
+	public int getLatitud() {
 		return this.latitud;
 	}
 	
-	public double getLongitud() {
+	public int getLongitud() {
 		return this.longitud;
 	}
 	
