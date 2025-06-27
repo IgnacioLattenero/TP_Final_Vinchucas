@@ -17,5 +17,4 @@ public class Basico extends NivelDeUsuario {
 
 		}
 	}
-
 }

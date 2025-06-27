@@ -42,12 +42,12 @@ public class Muestra {
 		this.estado = new AbiertaATodaOpinion();
 		
 		//Añadimos entonces el voto del publicador (lo que puede cambiar el estado)
-		this.agregarVoto(votoDelPublicador, this.votos);
+		this.agregarVoto(votoDelPublicador);
 	}
 	
 	//Metodos
 	
-	public void agregarVoto(Voto voto,List<Voto> votos) throws Exception {
+	public void agregarVoto(Voto voto) throws Exception {
 		
 		if(!haVotado(voto.getVotante())) {
 		  this.estado.agregarVoto(voto, this);
