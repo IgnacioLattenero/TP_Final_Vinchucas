@@ -1,4 +1,3 @@
-// --------------- BasicoTest.java ---------------
 package ManejoDeUsuariosTest;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -101,7 +100,6 @@ class BasicoTest {
             pocasMuestras.add(mRevision);
         }
 
-        // ACT
         basicoSpy.cambiarNivelDelUsuario(pocasMuestras, usuario);
 
         // ASSERT

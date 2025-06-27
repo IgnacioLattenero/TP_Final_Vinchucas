@@ -6,7 +6,7 @@ import static org.mockito.Mockito.when;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Collections; // Asegúrate de tenerlo importado en la clase Filtro
+import java.util.Collections; 
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,7 +19,7 @@ import muestras.Muestra;
 
 class FiltroLaUltimaVotacionOcurrioEnLaFechaDadaTest {
 
-	FiltroLaUltimaVotacionOcurrioEnLaFechaDada filtroUltimaFechaDeVotacion; // Tipo concreto
+	FiltroLaUltimaVotacionOcurrioEnLaFechaDada filtroUltimaFechaDeVotacion; 
 	
 	List<Muestra> muestrasOriginales;
 	
@@ -164,3 +164,13 @@ class FiltroLaUltimaVotacionOcurrioEnLaFechaDadaTest {
 			"No debería pasar el filtro si la muestra no tiene votos.");
 	}
 }
+
+
+
+
+
+
+
+
+
+
