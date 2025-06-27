@@ -17,7 +17,7 @@ public class FiltroLaUltimaVotacionOcurrioEnLaFechaDada extends Filtro {
     }
     
     public LocalDateTime getFechaBuscada() {
-        return this.fechaBuscada;
+        return this.fechaBuscada; 
     }
 
     @Override
@@ -32,10 +32,10 @@ public class FiltroLaUltimaVotacionOcurrioEnLaFechaDada extends Filtro {
             return false; 
         }
         
-        // ¡Crea una copia mutable antes de ordenar!
+        // Crea una copia mutable antes de ordenar
         List<LocalDateTime> fechasMutables = new ArrayList<>(fechasInmutables);
         
-        Collections.sort(fechasMutables); // Ahora sí puedes ordenar esta lista mutable
+        Collections.sort(fechasMutables); // Ahora sí se puede ordenar esta lista mutable
         
         LocalDateTime fechaMasActual = fechasMutables.get(fechasMutables.size() - 1);
         

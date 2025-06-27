@@ -67,7 +67,6 @@ class ExpertoTest {
             muestrasParaDegradar.add(m);
         }
 
-        // ACT
         expertoSpy.cambiarNivelDelUsuario(muestrasParaDegradar, usuario);
 
         // ASSERT
@@ -96,7 +95,6 @@ class ExpertoTest {
             muestrasParaMantener.add(m);
         }
 
-        // ACT
         expertoSpy.cambiarNivelDelUsuario(muestrasParaMantener, usuario);
 
         // ASSERT
