@@ -1,30 +1,32 @@
 package BuscadorTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*; 
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.mockito.Mockito.*;
 
 import Buscador.Filtro;
 import Buscador.FiltroTipoDeInsecto;
-import ManejoDeUsuarios.Opinion;
+import ManejoDeUsuarios.Opinion; 
+import muestras.Especie; 
 import muestras.Muestra;
 
 class FiltroTipoDeInsectoTest {
 
 	Filtro filtroTipoDeInsecto;
-	Opinion opinion;
+	Especie EspecieBuscada; 
 	List<Muestra> muestrasOriginales;
 	List<Muestra> muestrasEsperadas;
 	
 	
 	Muestra sordida;
 	Muestra guasayana;
-	Muestra chinchefoliada;
+	Muestra infestans;
 	
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -35,41 +37,37 @@ class FiltroTipoDeInsectoTest {
 		
 		sordida = mock(Muestra.class);
 		guasayana = mock(Muestra.class);
-		chinchefoliada = mock(Muestra.class);
+		infestans = mock(Muestra.class);
 		
 		muestrasOriginales.add(sordida);
 		muestrasOriginales.add(guasayana);
-		muestrasOriginales.add(chinchefoliada);
+		muestrasOriginales.add(infestans);
 		
-		muestrasEsperadas.add(sordida);
+		muestrasEsperadas.add(sordida); // 'sordida' es la única que debería pasar el filtro
 		
-		opinion = opinion.SORDIDA;
-		// SUT:
-		filtroTipoDeInsecto = new FiltroTipoDeInsecto(opinion);
+		EspecieBuscada = Especie.SORDIDA; 
 		
+		// SUT :
+		filtroTipoDeInsecto = new FiltroTipoDeInsecto(EspecieBuscada);
 		
+		when(sordida.getEspecie()).thenReturn(Especie.SORDIDA); 
+		when(guasayana.getEspecie()).thenReturn(Especie.GUASAYANA); 
+		when(infestans.getEspecie()).thenReturn(Especie.INFESTANS); 
+
 	}
 	
 	@Test
 	void filtrarTest() {
 		
-		assertEquals(muestrasEsperadas, filtroTipoDeInsecto.filtrar(muestrasOriginales));
+		List<Muestra> resultadoFiltro = filtroTipoDeInsecto.filtrar(muestrasOriginales);
+		
+		assertNotNull(resultadoFiltro);
+		assertEquals(muestrasEsperadas.size(), resultadoFiltro.size());
+	    assertTrue(resultadoFiltro.containsAll(muestrasEsperadas));
+	    assertEquals(sordida, resultadoFiltro.get(0));
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

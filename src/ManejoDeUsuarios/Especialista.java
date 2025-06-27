@@ -6,9 +6,6 @@ import muestras.Muestra;
 
 public class Especialista extends NivelDeUsuario {
 	
-
-
-
 	@Override
 	public void cambiarNivelDelUsuario(List<Muestra> muestras, Usuario usuario) {
 		
