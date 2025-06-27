@@ -1,10 +1,12 @@
+package appweb;
+
 import java.util.List;
 
-import Buscador.Buscador;
+
 import Buscador.Filtro;
 import ManejoDeUsuarios.Usuario;
 import muestras.Muestra;
-import observer.Organizacion;
+
 import observer.ZonaDeCobertura;
 
 
@@ -51,7 +53,7 @@ public class AppWeb {
 	public List<Muestra> muestrasAMenosDe(int km, Muestra muestraCentral){
 		
 		return this.muestras.stream()
-				 .filter(m -> muestraCentral.getUbicacion().distanciaA(m.getUbicacion()) <= km)
+				 .filter(m -> m.getUbicacion().distanciaA(muestraCentral.getUbicacion()) <= km)
 				 .toList();
 	}
 	
@@ -65,5 +67,15 @@ public class AppWeb {
 		this.usuarios.add(usuario);
 	}
 	
+	public List<Muestra> getMuestras(){
+		return this.muestras;
+	}
 	
+	public List<Usuario> getUsuarios(){
+		return this.usuarios;
+	}
+	
+	public List<ZonaDeCobertura> getZonasDeCobertura(){
+		return this.zonasDeCobertura;
+	}
 }
