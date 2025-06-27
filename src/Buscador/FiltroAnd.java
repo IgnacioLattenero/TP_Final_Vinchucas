@@ -6,33 +6,32 @@ import static org.mockito.Mockito.*;
 
 import muestras.Muestra;
 
-public class FiltroAnd implements Filtro {
+public class FiltroAnd extends Filtro {
 	
-	private Filtro[] filtros = new Filtro[2];
+	private Filtro primerFiltro;
+	private Filtro segundoFiltro;
 
 	public FiltroAnd(Filtro primerFiltro, Filtro segundoFiltro) {
 		
-		this.filtros[0] = primerFiltro;
-		this.filtros[1] = segundoFiltro;
+		this.primerFiltro = primerFiltro;
+		this.segundoFiltro = segundoFiltro;
 	}
 	
+	public Filtro getPrimerFiltro() {
+		
+		return this.primerFiltro;
+	}
+	
+	public Filtro getSegundoFiltro() {
+		
+		return this.segundoFiltro;
+	}
+
 	@Override
-	public List<Muestra> filtrar(List<Muestra> muestrasIniciales) {
+	public boolean pasaFiltro(Muestra muestra) {
 		
-		List<Muestra> listaResultante = filtros[1].filtrar(filtros[0].filtrar(muestrasIniciales));
-		
-//		if (listaResultante.isEmpty()) {
-//			
-//			return listaResultante;
-//		}
-		
-		return listaResultante; // testear y probar que si la lista es vacia en el primer filtro da error o no
-		
-		/**
-		 * si la lista del primer filtro es vacia, analizar si el segundo filtro se va a romper o no, 
-		 * y si se va a romper, atrapar ese error, con un if. buscar en gemini
-		 * saber explicarlo para la defensa oral
-		 * */
+		return this.getPrimerFiltro().pasaFiltro(muestra) &&
+			   this.getSegundoFiltro().pasaFiltro(muestra);
 	}
 
 }

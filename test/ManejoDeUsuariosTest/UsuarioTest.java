@@ -20,7 +20,6 @@ import ManejoDeUsuarios.NivelDeUsuario;
 import ManejoDeUsuarios.Opinion;
 import ManejoDeUsuarios.Usuario;
 import ManejoDeUsuarios.Voto;
-import muestras.Especie;
 import muestras.Muestra;
 import unidadGeografica.Ubicacion;
 
@@ -54,7 +53,7 @@ class UsuarioTest {
 	
 	Ubicacion ubicacion;
 	
-	Especie especieEsperada;
+	Opinion especieEsperada;
 	
 	@BeforeEach
 	public void setUp() throws Exception {
@@ -97,7 +96,7 @@ class UsuarioTest {
 		
 		usuario = new Usuario(basico);
 		
-		especieEsperada = mock(Especie.class);
+		especieEsperada = mock(Opinion.class);
 		
 		when(voto.getOpinion()).thenReturn(Opinion.SORDIDA);
 		when(voto.getVotante()).thenReturn(usuario);

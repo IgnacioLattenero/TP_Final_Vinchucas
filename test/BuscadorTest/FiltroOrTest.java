@@ -15,7 +15,7 @@ import Buscador.FiltroAnd;
 import Buscador.FiltroFechaDeCreacion;
 import Buscador.FiltroOr;
 import Buscador.FiltroTipoDeInsecto;
-import muestras.Especie;
+import ManejoDeUsuarios.Opinion;
 import muestras.Muestra;
 
 class FiltroOrTest {
@@ -38,7 +38,7 @@ class FiltroOrTest {
 	@BeforeEach
 	public void setUp() throws Exception {
 		
-		filtroTipoDeInsecto = new FiltroTipoDeInsecto(Especie.SORDIDA);
+		filtroTipoDeInsecto = new FiltroTipoDeInsecto(Opinion.SORDIDA);
 		fechaBuscada = LocalDateTime.of(2025, 6, 20, 13, 0, 0);
 		otraFecha = LocalDateTime.of(2025, 1, 1, 14, 0, 0);
 		filtroFechaDeCreacion = new FiltroFechaDeCreacion(fechaBuscada);
@@ -61,10 +61,10 @@ class FiltroOrTest {
 
 		filtroOr = new FiltroOr(filtroTipoDeInsecto, filtroFechaDeCreacion);
 		
-		when(sordida.getEspecie()).thenReturn(Especie.SORDIDA);
-		when(guasayana.getEspecie()).thenReturn(Especie.GUASAYANA);
-		when(infestans.getEspecie()).thenReturn(Especie.INFESTANS);
-		when(infestans2.getEspecie()).thenReturn(Especie.INFESTANS);
+		when(sordida.getEspecie()).thenReturn(Opinion.SORDIDA);
+		when(guasayana.getEspecie()).thenReturn(Opinion.GUASAYANA);
+		when(infestans.getEspecie()).thenReturn(Opinion.INFESTANS);
+		when(infestans2.getEspecie()).thenReturn(Opinion.INFESTANS);
 		
 		when(sordida.getFechaDeCreacion()).thenReturn(otraFecha);
 		when(guasayana.getFechaDeCreacion()).thenReturn(fechaBuscada);
@@ -77,7 +77,7 @@ class FiltroOrTest {
 	@Test
 	void filtrarTest() {
 		
-		 List<Muestra> resultadoFiltro = filtroOr.filtrar(muestrasIniciales);
+		 List<Muestra> resultadoFiltro = filtroOr.buscar(muestrasIniciales);
 	        
 	     assertEquals(muestrasEsperadas.size(), resultadoFiltro.size());
 	     assertTrue(resultadoFiltro.containsAll(muestrasEsperadas));

@@ -1,11 +1,8 @@
+// --------------- ExpertoTest.java ---------------
 package ManejoDeUsuariosTest;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -15,126 +12,104 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ManejoDeUsuarios.Basico;
-import ManejoDeUsuarios.Experto;
+import ManejoDeUsuarios.Experto; 
 import ManejoDeUsuarios.Usuario;
 import muestras.Muestra;
 
 class ExpertoTest {
 
-		Usuario usuario;
-		Basico basico;
-		Experto experto;
-		
-		List<Muestra> muestras;
-		
-		Muestra sordida;
-		Muestra guasayana;
-		Muestra infestans;
-		Muestra sordida2;
-		Muestra guasayana2;
-		Muestra infestans2;
-		Muestra sordida3;
-		Muestra guasayana3;
-		Muestra infestans3;
-		Muestra sordida4;
-		Muestra guasayana4;
-		Muestra infestans4;
-		
-		LocalDateTime fechaDeCreacionValida;
-		
-		@BeforeEach
-		public void setUp() throws Exception {
-			
-			usuario = mock(Usuario.class);
-			experto = new Experto();
-			basico = mock(Basico.class);
-			muestras = new ArrayList<Muestra>();
-			
-			sordida = mock(Muestra.class);
-			guasayana = mock(Muestra.class);
-			infestans = mock(Muestra.class);
-			sordida2 = mock(Muestra.class);
-			guasayana2 = mock(Muestra.class);
-			infestans2 = mock(Muestra.class);
-			sordida3 = mock(Muestra.class);
-			guasayana3 = mock(Muestra.class);
-			infestans3 = mock(Muestra.class);
-			sordida4 = mock(Muestra.class);
-			guasayana4 = mock(Muestra.class);
-			infestans4 = mock(Muestra.class);
-			
-			muestras.add(sordida);
-			muestras.add(sordida2);
-			muestras.add(sordida3);
-			muestras.add(sordida4);
-			muestras.add(infestans);
-			muestras.add(infestans2);
-			muestras.add(infestans3);
-			muestras.add(infestans4);
-			muestras.add(guasayana);
-			muestras.add(guasayana2);
-			muestras.add(guasayana3);
-			muestras.add(guasayana4);
-			
-			fechaDeCreacionValida = LocalDateTime.of(2025, 6, 25, 13, 0, 0);
-			
-			when(sordida.getPublicador()).thenReturn(usuario);
-			when(sordida2.getPublicador()).thenReturn(usuario);
-			when(sordida3.getPublicador()).thenReturn(usuario);
-			when(sordida4.getPublicador()).thenReturn(usuario);
-			when(guasayana.getPublicador()).thenReturn(usuario);
-			when(guasayana2.getPublicador()).thenReturn(usuario);
-			when(guasayana3.getPublicador()).thenReturn(usuario);
-			when(guasayana4.getPublicador()).thenReturn(usuario);
-			when(infestans.getPublicador()).thenReturn(usuario);
-			when(infestans2.getPublicador()).thenReturn(usuario);
-			when(infestans3.getPublicador()).thenReturn(usuario);
-			when(infestans4.getPublicador()).thenReturn(usuario);
-			
-			when(sordida.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			when(sordida2.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			when(sordida3.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			when(sordida4.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			when(guasayana.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			when(guasayana2.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			when(guasayana3.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			when(guasayana4.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			when(infestans.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			when(infestans2.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			when(infestans3.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			when(infestans4.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
-			
-			when(sordida.haVotado(usuario)).thenReturn(false);
-			when(sordida2.haVotado(usuario)).thenReturn(false);
-			when(sordida3.haVotado(usuario)).thenReturn(false);
-			when(sordida4.haVotado(usuario)).thenReturn(false);
-			when(guasayana.haVotado(usuario)).thenReturn(false);
-			when(guasayana2.haVotado(usuario)).thenReturn(false);
-			when(guasayana3.haVotado(usuario)).thenReturn(false);
-			when(guasayana4.haVotado(usuario)).thenReturn(false);
-			when(infestans.haVotado(usuario)).thenReturn(false);
-			when(infestans2.haVotado(usuario)).thenReturn(false);
-			when(infestans3.haVotado(usuario)).thenReturn(false);
-			when(infestans4.haVotado(usuario)).thenReturn(false);
-			
-			when(usuario.getNivelDeUsuario()).thenReturn(basico);
-		}
-		
-		@Test
-		void cambiarNivelDeUsuarioTest() {
-			
-			experto.cambiarNivelDelUsuario(muestras, usuario);
-			assertEquals(basico, usuario.getNivelDeUsuario());
-		}
+    Usuario usuario;
+    Usuario otroUsuario; // Para representar publicadores/votantes que no son el usuario SUT
+    Experto expertoSpy; // SUT
+    
+    // La lista de muestras se creará directamente en cada test
+    // List<Muestra> muestras; 
+    
+    LocalDateTime fechaActualParaTest;
+    LocalDateTime fechaDeCreacionValida;
 
-	}
+    @BeforeEach
+    public void setUp() throws Exception {
+        usuario = mock(Usuario.class);
+        otroUsuario = mock(Usuario.class); // Para muestras no relacionadas al usuario principal
+        expertoSpy = spy(new Experto()); 
+        
+        fechaActualParaTest = LocalDateTime.of(2025, 6, 26, 12, 0, 0); 
+        fechaDeCreacionValida = fechaActualParaTest.minusDays(5); 
 
+        when(usuario.getNivelDeUsuario()).thenReturn(expertoSpy); 
 
+        // Mockear el getFechaActual() en el spy para todos los tests
+        doReturn(fechaActualParaTest).when(expertoSpy).getFechaActual();
+    }
+    
+    @Test
+    void cambiarNivelDeUsuario_DeExpertoABasico_CuandoNoCumpleCondiciones() {
+        // Escenario: El usuario es Experto y NO cumple con los requisitos para mantener el nivel.
 
+        List<Muestra> muestrasParaDegradar = new ArrayList<>();
 
+        // CONFIGURAR MUESTRAS PARA NO CUMPLIR ENVÍOS (menos de 11)
+        for (int i = 0; i < 5; i++) { // Solo 5 envíos
+            Muestra m = mock(Muestra.class);
+            when(m.getPublicador()).thenReturn(usuario); // <-- Publicador es el usuario
+            when(m.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
+            muestrasParaDegradar.add(m);
+        }
+        // CONFIGURAR MUESTRAS PARA CUMPLIR REVISIONES (más de 20)
+        // (Esto es para que el OR en el if de Experto se cumpla con la primera condición falsa)
+        for (int i = 0; i < 21; i++) { 
+            Muestra m = mock(Muestra.class);
+            when(m.haVotado(usuario)).thenReturn(true);
+            // Publicador también debe estar mockeado
+            when(m.getPublicador()).thenReturn(otroUsuario); 
+            when(m.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
+            muestrasParaDegradar.add(m);
+        }
 
+        // ACT
+        expertoSpy.cambiarNivelDelUsuario(muestrasParaDegradar, usuario);
 
+        // ASSERT
+        verify(usuario).setNivel(isA(Basico.class));
+        verify(usuario, never()).setNivel(eq(expertoSpy));
+    }
 
+    @Test
+    void cambiarNivelDeUsuario_ExpertoNoCambia_SiCumpleCondiciones() {
+        // Escenario: El usuario es Experto y SÍ cumple con los requisitos para MANTENER el nivel.
 
+        List<Muestra> muestrasParaMantener = new ArrayList<>();
 
+        // CONFIGURAR MUESTRAS PARA CUMPLIR AMBAS CONDICIONES
+        for (int i = 0; i < 11; i++) { // 11 envíos
+            Muestra m = mock(Muestra.class);
+            when(m.getPublicador()).thenReturn(usuario); // <-- Publicador es el usuario
+            when(m.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
+            muestrasParaMantener.add(m);
+        }
+        for (int i = 0; i < 21; i++) { // 21 revisiones
+            Muestra m = mock(Muestra.class);
+            when(m.haVotado(usuario)).thenReturn(true);
+            when(m.getPublicador()).thenReturn(otroUsuario); // Publicador también debe estar mockeado
+            when(m.getFechaDeCreacion()).thenReturn(fechaDeCreacionValida);
+            muestrasParaMantener.add(m);
+        }
 
+        // ACT
+        expertoSpy.cambiarNivelDelUsuario(muestrasParaMantener, usuario);
+
+        // ASSERT
+        verify(usuario, never()).setNivel(any());
+    }
+    
+    @Test
+    void getFechaActualTest() {
+    	
+    	assertEquals(fechaActualParaTest, expertoSpy.getFechaActual());
+    }
+    
+    
+    
+    
+}

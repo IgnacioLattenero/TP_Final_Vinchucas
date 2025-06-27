@@ -12,14 +12,13 @@ import org.junit.jupiter.api.Test;
 
 import Buscador.Filtro;
 import Buscador.FiltroTipoDeInsecto;
-import ManejoDeUsuarios.Opinion; 
-import muestras.Especie; 
+import ManejoDeUsuarios.Opinion;  
 import muestras.Muestra;
 
 class FiltroTipoDeInsectoTest {
 
 	Filtro filtroTipoDeInsecto;
-	Especie EspecieBuscada; 
+	Opinion EspecieBuscada; 
 	List<Muestra> muestrasOriginales;
 	List<Muestra> muestrasEsperadas;
 	
@@ -45,21 +44,21 @@ class FiltroTipoDeInsectoTest {
 		
 		muestrasEsperadas.add(sordida); // 'sordida' es la única que debería pasar el filtro
 		
-		EspecieBuscada = Especie.SORDIDA; 
+		EspecieBuscada = Opinion.SORDIDA; 
 		
 		// SUT :
 		filtroTipoDeInsecto = new FiltroTipoDeInsecto(EspecieBuscada);
 		
-		when(sordida.getEspecie()).thenReturn(Especie.SORDIDA); 
-		when(guasayana.getEspecie()).thenReturn(Especie.GUASAYANA); 
-		when(infestans.getEspecie()).thenReturn(Especie.INFESTANS); 
+		when(sordida.getEspecie()).thenReturn(Opinion.SORDIDA); 
+		when(guasayana.getEspecie()).thenReturn(Opinion.GUASAYANA); 
+		when(infestans.getEspecie()).thenReturn(Opinion.INFESTANS); 
 
 	}
 	
 	@Test
 	void filtrarTest() {
 		
-		List<Muestra> resultadoFiltro = filtroTipoDeInsecto.filtrar(muestrasOriginales);
+		List<Muestra> resultadoFiltro = filtroTipoDeInsecto.buscar(muestrasOriginales);
 		
 		assertNotNull(resultadoFiltro);
 		assertEquals(muestrasEsperadas.size(), resultadoFiltro.size());

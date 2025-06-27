@@ -5,7 +5,7 @@ import java.util.List;
 import muestras.EstadoDeMuestra;
 import muestras.Muestra;
 
-public class FiltroNivelDeVerificacion implements Filtro {
+public class FiltroNivelDeVerificacion extends Filtro {
 
 	private EstadoDeMuestra nivelDeVerificacion;
 	
@@ -20,12 +20,9 @@ public class FiltroNivelDeVerificacion implements Filtro {
 	}
 
 	@Override
-	public List<Muestra> filtrar(List<Muestra> muestrasIniciales) {
+	public boolean pasaFiltro(Muestra muestra) {
 		
-		
-		return muestrasIniciales.stream()
-								.filter(muestra -> muestra.getEstado().equals(this.getNivelDeVerificacion()))
-								.toList();
+		return muestra.getEstado().equals(this.getNivelDeVerificacion());
 	}
 	
 }

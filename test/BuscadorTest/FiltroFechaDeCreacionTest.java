@@ -61,7 +61,7 @@ class FiltroFechaDeCreacionTest {
     @Test
     void filtrarTest() {
         
-        List<Muestra> resultadoFiltro = filtroFechaDeCreacion.filtrar(muestrasOriginales);
+        List<Muestra> resultadoFiltro = filtroFechaDeCreacion.buscar(muestrasOriginales);
         
         assertEquals(muestrasEsperadas.size(), resultadoFiltro.size());
         assertTrue(resultadoFiltro.containsAll(muestrasEsperadas));
