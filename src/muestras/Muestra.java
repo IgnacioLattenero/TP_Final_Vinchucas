@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import ManejoDeUsuarios.Basico;
 import ManejoDeUsuarios.Opinion;
 import ManejoDeUsuarios.Usuario;
 import ManejoDeUsuarios.Voto;
@@ -69,6 +70,16 @@ public class Muestra {
 		return this.votos.stream()
 						 .anyMatch(v -> v.getVotante().equals(usuario));
 		
+	}
+	
+	public List<Voto> votosDeExpertos() {
+		return votos.stream()
+				.filter(v -> !v.getNivelDelVotante().equals(new Basico()))//Todos los que no sean basicos
+				.toList();
+	}
+	
+	public boolean hayOpinionCoincidenteCon(List<Voto> votosAVerificar, Opinion opinion) {
+		return votos.stream().anyMatch(voto -> voto.getOpinion().equals(opinion));
 	}
 	
 	//Getters and setters
