@@ -11,41 +11,26 @@ import ManejoDeUsuarios.Voto;
 public class VotanSoloExpertos extends EstadoDeMuestra {
 
 	@Override
-	public void agregarVoto(Voto voto, Muestra muestra) throws Exception {
-		if(!voto.getNivelDelVotante().equals(new Basico())) { 
-			super.añadirVotoSegunAntiguedad(voto, muestra); 
-		}else {
-			throw new Exception("Solo pueden votar los expertos!!!");
-		}
+	public void agregarVoto(Voto voto, Muestra muestra) {
+		voto.getNivelDelVotante().addVoto(muestra, voto);
+	}
 		
-		//Cambiar de estado si dos expertos coinciden (pasa a verificada)
-		
-		if(hayCoincidencia(muestra.getVotos())) {
+	@Override
+	public void votarEn(Voto voto, Muestra muestra) {
+		muestra.getVotos().add(voto);
+	}
+	
+	@Override
+	public void votarYVerificar(Voto voto, Muestra muestra) {
+		this.votarEn(voto, muestra);
+		if (muestra.hayOpinionCoincidenteCon(muestra.votosDeExpertos(), voto.getOpinion())) {
 			muestra.setEstado(new Verificada());
 		}
-		
 	}
-
+	
 	@Override
 	public String resultadoActual(List<Voto> votos) {
 		return super.opinionMasVotadaEn(super.votosExpertosEn(votos));
 	}
-	
-
-	public boolean hayCoincidencia(List<Voto> votos) {
-		
-		// Extraemos de la lista de votos, solo aquellos realizados 
-		// por usuarios expertos/especialistas
-		List<Voto> votosExpertos = super.votosExpertosEn(votos);
-		
-		//Opinion / cantidadDeVotos
-		Map<Opinion, Long> votosPorOpinion = votosExpertos.stream()
-							    				  		  .collect(Collectors.groupingBy(Voto::getOpinion, Collectors.counting()));
-		
-		return votosPorOpinion.entrySet().stream() //Convertimos en Stream el par clave/valor
-										 .anyMatch(entry -> entry.getValue() >= 2);//Si hay alguno con 2 o mas votos, entonces hay coincidencia
-	}
-
-
 
 }

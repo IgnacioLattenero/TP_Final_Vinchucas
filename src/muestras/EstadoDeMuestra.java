@@ -10,9 +10,10 @@ import ManejoDeUsuarios.*;
 
 public abstract class EstadoDeMuestra {
 
-	public abstract void agregarVoto(Voto voto, Muestra muestra) throws Exception;
+	public abstract void agregarVoto(Voto voto, Muestra muestra);
 	public abstract String resultadoActual(List<Voto> votos);
-	
+	public abstract void votarEn(Voto voto, Muestra muestra);
+	public abstract void votarYVerificar(Voto voto, Muestra muestra);	
 	
 	public String opinionMasVotadaEn(List<Voto> votos) {
 
@@ -48,31 +49,5 @@ public abstract class EstadoDeMuestra {
 		return masVotados;
 		
 	}
-	
-	public List<Voto> votosExpertosEn(List<Voto> votos){
-		//Extraemos de la lista de votos, solo aquellos realizados por usuarios expertos/especialistas
-		
-		return votos.stream()
-					.filter(v -> !v.getNivelDelVotante().equals(new Basico()))//Todos los que no sean basicos
-					.toList();
-		
-	
-	}
-	
-	public void añadirVotoSegunAntiguedad(Voto voto, Muestra muestra) {
-		
-		if(elVotoEsElMasActualEn(voto, muestra)) {
-			muestra.getVotos().add(0, voto); // Va adelante (index 0) si es el mas actual
-		}else {
-			muestra.getVotos().add(voto); // Va al final si es el mas antiguo
-			
-		}	
-	}
-	
-	public boolean elVotoEsElMasActualEn(Voto voto, Muestra muestra) {
-		
-		return muestra.getVotos().get(0).antiguedadEnDias() > voto.antiguedadEnDias();
-	}
-						
 	
 }//End_Class
