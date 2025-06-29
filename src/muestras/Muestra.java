@@ -42,6 +42,7 @@ public class Muestra {
 		this.votos = new ArrayList<Voto>();
 		this.fechaDeCreacion = LocalDateTime.now();
 		this.ubicacion = ubicacion;
+		this.zonasALaQuePertenece = new ArrayList<ZonaDeCobertura>();
 		
 		//Establecemos el estado inicial
 		this.estado = new AbiertaATodaOpinion();
@@ -52,10 +53,12 @@ public class Muestra {
 	
 	//Metodos
 	
-	public void agregarVoto(Voto voto) {
+	public void agregarVoto(Voto voto) throws Exception {
 		
 		if(!haVotado(voto.getVotante())) {
 		  this.estado.agregarVoto(voto, this);
+		}else {
+			throw new Exception("El votante ya ha votado en esta muestra");
 		}	 
 
 	}

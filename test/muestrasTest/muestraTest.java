@@ -1,6 +1,6 @@
 package muestrasTest;
 
-import static org.junit.Assert.assertThrows;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -13,14 +13,16 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import ManejoDeUsuarios.Basico;
+import ManejoDeUsuarios.Especialista;
 import ManejoDeUsuarios.Experto;
 import ManejoDeUsuarios.Opinion;
 import ManejoDeUsuarios.Usuario;
 import ManejoDeUsuarios.Voto;
-import muestras.AbiertaATodaOpinion;
+
 
 import muestras.Muestra;
 import muestras.VotanSoloExpertos;
+import observer.ZonaDeCobertura;
 import unidadGeografica.Ubicacion;
 
 
@@ -53,8 +55,15 @@ class muestraTest {
 	Usuario manuelExperto = mock(Usuario.class); 
 	Voto votoManuel 	  = mock(Voto.class);
 	
+	Usuario especialista  = mock(Usuario.class); 
+	Voto votoEspecialista = mock(Voto.class);
+	
+	ZonaDeCobertura zona  = mock(ZonaDeCobertura.class);
+	
 	@BeforeEach
 	public void setUp() throws Exception {
+		
+		
 		
 		when(votoIvan.getNivelDelVotante()).thenReturn(new Basico());
 		when(votoIvan.getVotante()).thenReturn(ivan);
@@ -67,6 +76,8 @@ class muestraTest {
 							  votoIvan,
 							  ubicacion,
 							  especie);
+		
+		
 		// Maria (basico)
 		when(votoMaria.getNivelDelVotante()).thenReturn(new Basico());
 		when(votoMaria.getVotante()).thenReturn(maria);
@@ -96,7 +107,33 @@ class muestraTest {
 		when(votoManuel.getNivelDelVotante()).thenReturn(new Experto());
 		when(votoManuel.getVotante()).thenReturn(manuelExperto);
 		when(votoManuel.getOpinion()).thenReturn(Opinion.GUASAYANA);
+		
+		// Especialista (Experto)
+		when(votoEspecialista.getNivelDelVotante()).thenReturn(new Especialista());
+		when(votoEspecialista.getVotante()).thenReturn(especialista);
+		when(votoEspecialista.getOpinion()).thenReturn(Opinion.GUASAYANA);
+		
+		
+		
 	}
+	
+
+	@Test
+	void elVotoDelPublicadorFueAgregadoAlInstanciarLaMuestra() {
+		
+		assertTrue(muestra.getVotos().contains(votoIvan));
+	}
+	
+	@Test
+	void seAgreganLosVotosDeMariaYMiguel() throws Exception {
+		
+		muestra.agregarVoto(votoMaria);
+		muestra.agregarVoto(votoMiguel);
+		
+		assertTrue(muestra.getVotos().contains(votoMaria));
+		assertTrue(muestra.getVotos().contains(votoMiguel));
+	}
+	
 	
 	@Test
 	void resultadoActualDeLaMuestraAbiertaATodaOpinionEsImagenPocoClara() throws Exception {
@@ -107,7 +144,7 @@ class muestraTest {
 		assertEquals("IMAGENPOCOCLARA", muestra.resultadoActual());
 	}
 	
-	/*
+	
 	@Test
 	void resultadoActualDeLaMuestraEsNoDefinidaParaSoloExpertos() throws Exception {
 		
@@ -116,8 +153,22 @@ class muestraTest {
 		muestra.agregarVoto(votoJuan);
 		muestra.agregarVoto(votoLuis);
 		
-		assertEquals("No Definida", muestra.resultadoActual());
-	}*/
+		assertEquals("No definida", muestra.resultadoActual());
+	}
+	
+	@Test
+	void resultadoActualDeLaMuestraEsInfestansParaSoloExpertos() throws Exception {
+		
+		when(votoManuel.getOpinion()).thenReturn(Opinion.INFESTANS);
+		
+		muestra.agregarVoto(votoMaria);
+		muestra.agregarVoto(votoMiguel);
+		muestra.agregarVoto(votoJuan);
+		muestra.agregarVoto(votoLuis);
+		muestra.agregarVoto(votoManuel);
+		
+		assertEquals("INFESTANS", muestra.resultadoActual());
+	}
 	
 	@Test
 	void laMuestraVerificadaDevuelveGuasayana() throws Exception {
@@ -131,39 +182,12 @@ class muestraTest {
 		assertEquals("GUASAYANA", muestra.resultadoActual());
 	}
 	
-	/* Funciona, pero hay que chequear la exception
-	@Test
-	void laMuestraVerificadaNoAdmiteMasVotos() throws Exception {
-		
-		muestra.agregarVoto(votoMaria);
-		muestra.agregarVoto(votoMiguel);
-		muestra.agregarVoto(votoJuan);
-		muestra.agregarVoto(votoLuis);
-		muestra.agregarVoto(votoCarla);
-		muestra.agregarVoto(votoManuel);
-		
-	}*/
-	
-	@Test
-	void elVotoDelPublicadorFueAgregadoAlInstanciarLaMuestra() {
-		
-		assertTrue(muestra.getVotos().contains(votoIvan));
-	}
-
-	@Test
-	void siVotaUnVotanteNuevoSuVotoSeAñadeAMuestra() throws Exception {
-		
-		
-		muestra.agregarVoto(votoMaria);
-		
-		assertTrue(muestra.getVotos().contains(votoMaria));
-	}
-	
 	@Test
 	void elUsuarioIvanYaHaVotado(){
 	
 		assertTrue(muestra.haVotado(ivan));
 	}
+	
 	
 	@Test
 	void getFotoRetornaFoto(){
@@ -183,6 +207,7 @@ class muestraTest {
 		assertEquals(ivan, muestra.getPublicador());
 	}
 	
+	
 	@Test
 	void getVotosDevuelveUnaListaConLosVotosDeIvanYMaria() throws Exception{
 
@@ -196,6 +221,7 @@ class muestraTest {
 		assertEquals(resultado, muestra.getVotos());
 	}
 	
+	
 	@Test
 	void getFechaDeCreacionRetornaFechaDeHoy(){
 		
@@ -206,19 +232,12 @@ class muestraTest {
 		assertEquals(fechaDeHoy.getDayOfYear()  , muestra.getFechaDeCreacion().getDayOfYear());
 	}
 
-	/* Cambio de SUT/DOC
-	@Test
-	void getEstadoRetornaAbiertaATodaOpinion(){
-		
-		AbiertaATodaOpinion estado = new AbiertaATodaOpinion();
-		
-		assertEquals(estado, muestra.getEstado());
-	}*/
-
+	
 	@Test
 	void getUbicacionTest(){
 		assertEquals(ubicacion, muestra.getUbicacion());
 	}
+	
 	
 	@Test
 	void seteoManualDeEstadoASoloExpertosTest(){
@@ -230,16 +249,7 @@ class muestraTest {
 		assertEquals(nuevoEstado, muestra.getEstado());
 	}
 	
-	/* Cambio de SUT/DOC
-	@Test
-	void cambioDeEstadoAlVotarSoloUnExpertoTest() throws Exception{
-		
-		VotanSoloExpertos nuevoEstado = new VotanSoloExpertos();
-		
-		muestra.agregarVoto(votoJuan);
-		
-		assertEquals(nuevoEstado, muestra.getEstado());
-	}*/
+	
 	
 	@Test
 	void getEspecieTest(){
@@ -248,11 +258,61 @@ class muestraTest {
 	}
 
 	
-	/*
 	@Test
 	void noSePuedeVotarDosVeces() throws Exception {
+
+		// El publicador NO DEBE votar de nuevo, debe lanzar Exception
+        Exception exception = assertThrows(Exception.class, () -> {
+        	muestra.agregarVoto(votoIvan);
+        });
+
+        assertEquals("El votante ya ha votado en esta muestra", exception.getMessage());
+	}
+	
+	
+	@Test
+	void laMuestraVerificadaNoAdmiteMasVotos() throws Exception {
 		
-		muestra.agregarVoto(votoIvan);
-		//TODO: COMO VERIFICAR QUE SE LANZÓ UNA EXCEPTION?
-	}*/
+		muestra.agregarVoto(votoMaria);
+		muestra.agregarVoto(votoMiguel);
+		muestra.agregarVoto(votoJuan);
+		muestra.agregarVoto(votoLuis);
+		muestra.agregarVoto(votoCarla);
+		
+		muestra.agregarVoto(votoManuel); //Este voto no se debe poder añadir
+		
+		assertFalse(muestra.getVotos().contains(votoManuel));
+		
+	}
+	
+	
+	@Test
+	void seAñadioLaZonaDeCoberturaALaMuestra(){
+		
+		muestra.agregarZona(zona);
+		
+		assertTrue(muestra.getZonasALasQuePertenece().contains(zona));
+	}
+
+	@Test
+	void votaUnEspecialistaEnAbiertaATodaOpinion() throws Exception{
+		
+		muestra.agregarVoto(votoEspecialista);
+		
+		assertTrue(muestra.getVotos().contains(votoEspecialista));
+	}
+	
+	@Test
+	void especialistaVotaEnEstadoASoloExpertos() throws Exception{
+		
+		VotanSoloExpertos nuevoEstado = new VotanSoloExpertos();
+		
+		muestra.setEstado(nuevoEstado);
+		
+		muestra.agregarVoto(votoEspecialista);
+		
+		assertTrue(muestra.getVotos().contains(votoEspecialista));
+	}
+	
+	
 }

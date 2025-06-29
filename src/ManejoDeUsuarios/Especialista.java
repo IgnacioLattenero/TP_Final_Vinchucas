@@ -17,15 +17,17 @@ public class Especialista extends NivelDeUsuario {
 
 	@Override
 	public void votarEnMuestraAbierta(Muestra muestra, Voto voto) {
-		muestra.agregarVoto(voto);		
+		muestra.getVotos().add(voto);		
 	}
 
 	@Override
 	public void votarEnMuestraExpertos(Muestra muestra, Voto voto) {
-		muestra.agregarVoto(voto);
+
 		if (muestra.hayOpinionCoincidenteCon(muestra.votosDeExpertos(), voto.getOpinion())) {
 			muestra.setEstado(new Verificada());
 		}
+		
+		muestra.getVotos().add(voto);
 	}
 
 	@Override
