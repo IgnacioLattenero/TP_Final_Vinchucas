@@ -27,5 +27,10 @@ public class Especialista extends NivelDeUsuario {
 			muestra.setEstado(new Verificada());
 		}
 	}
+
+	@Override
+	public boolean esVotoCalificado() {
+			return true;
+	}
 	
 }
