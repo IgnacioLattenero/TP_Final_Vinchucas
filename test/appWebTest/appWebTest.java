@@ -173,6 +173,15 @@ class appWebTest {
 		assertEquals(resultado, app.muestrasAMenosDe(10, muestra1));
 	}
 	
+	@Test
+	void seNivelanTodosLosUsuariosRegistrados() {
+	
+		app.nivelarUsuarios();
+		
+		verify(user1).cambiarNivelDelUsuario(muestras);
+		verify(user2).cambiarNivelDelUsuario(muestras);
+		verify(user3).cambiarNivelDelUsuario(muestras);
+	}
 	
 	
 	
