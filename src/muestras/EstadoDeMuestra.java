@@ -40,7 +40,7 @@ public abstract class EstadoDeMuestra {
 				
 		//Ahora busco las opiniones que tienen ese valor maximo
 		List<Opinion> masVotados = numeroDeVotosPorOpinion.entrySet().stream() //Convertimos en Stream el par clave/valor
-														  .filter(entry -> entry.getValue() == maxVotos) //filtramos por valor
+														  .filter(entry -> entry.getValue().equals(maxVotos)) //filtramos por valor
 														  .map(Map.Entry::getKey) //Transforma cada entrada filtrada en su clave(Opinion).Ahora el stream es de tipo Stream<Opinion>.
 														  .collect(Collectors.toList());//Juntamos las opiniones mas votadas en una lista
 						

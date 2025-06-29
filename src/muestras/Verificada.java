@@ -7,7 +7,7 @@ public class Verificada extends EstadoDeMuestra {
 
 	@Override
 	public void agregarVoto(Voto voto, Muestra muestra) {
-		//no se agregan votos en este estado
+		//NO SE ADMITEN MAS VOTOS UNA VEZ VERIFICADA 
 	}
 
 	@Override

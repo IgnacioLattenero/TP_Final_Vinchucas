@@ -19,7 +19,7 @@ public class Basico extends NivelDeUsuario {
 
 	@Override
 	public void votarEnMuestraAbierta(Muestra muestra, Voto voto) {
-		muestra.agregarVoto(voto);
+		muestra.getVotos().add(voto);
 	}
 
 	@Override
