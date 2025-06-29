@@ -3,6 +3,7 @@ package ManejoDeUsuarios;
 import java.util.List;
 import muestras.Muestra;
 import muestras.Verificada;
+import muestras.VotanSoloExpertos;
 
 public class Experto extends NivelDeUsuario {
 
@@ -21,7 +22,8 @@ public class Experto extends NivelDeUsuario {
 
 	@Override
 	public void votarEnMuestraAbierta(Muestra muestra, Voto voto) {
-		muestra.agregarVoto(voto);		
+		muestra.agregarVoto(voto);
+		muestra.setEstado(new VotanSoloExpertos());
 	}
 
 	@Override
