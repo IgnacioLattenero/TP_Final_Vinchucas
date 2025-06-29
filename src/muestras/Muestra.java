@@ -72,7 +72,7 @@ public class Muestra {
 	
 	public List<Voto> votosDeExpertos() {
 		return votos.stream()
-				.filter(v -> !v.getNivelDelVotante().equals(new Basico()))//Todos los que no sean basicos
+				.filter(v -> v.getNivelDelVotante().esVotoCalificado())//Todos los que no sean basicos
 				.toList();
 	}
 	

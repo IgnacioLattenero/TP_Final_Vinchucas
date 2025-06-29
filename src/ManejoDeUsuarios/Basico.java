@@ -26,4 +26,9 @@ public class Basico extends NivelDeUsuario {
 	public void votarEnMuestraExpertos(Muestra muestra, Voto voto) {
 		// el usuario básico no vota en ese estado
 	}
+
+	@Override
+	public boolean esVotoCalificado() {
+		return false;
+	}
 }
