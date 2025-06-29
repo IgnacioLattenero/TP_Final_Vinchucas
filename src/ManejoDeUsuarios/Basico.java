@@ -1,10 +1,7 @@
 package ManejoDeUsuarios;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
-import muestras.AbiertaATodaOpinion;
-import muestras.EstadoDeMuestra;
 import muestras.Muestra;
 
 public class Basico extends NivelDeUsuario {
@@ -21,10 +18,12 @@ public class Basico extends NivelDeUsuario {
 	}
 
 	@Override
-	public void addVoto(Muestra muestra, Voto voto) {
-		EstadoDeMuestra abiertaATodaOpinion = new AbiertaATodaOpinion();
-		if(muestra.getEstado().equals(abiertaATodaOpinion)) {
-			muestra.getEstado().agregarVoto(voto, muestra);
-		}
+	public void votarEnMuestraAbierta(Muestra muestra, Voto voto) {
+		muestra.agregarVoto(voto);
+	}
+
+	@Override
+	public void votarEnMuestraExpertos(Muestra muestra, Voto voto) {
+		// el usuario básico no vota en ese estado
 	}
 }

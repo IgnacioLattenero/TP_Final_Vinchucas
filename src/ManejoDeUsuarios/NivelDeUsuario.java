@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-import muestras.EstadoDeMuestra;
 import muestras.Muestra;
 
 public abstract class NivelDeUsuario {
@@ -14,8 +13,9 @@ public abstract class NivelDeUsuario {
     }
 
     public abstract void cambiarNivelDelUsuario(List<Muestra> muestras, Usuario usuario);
+    public abstract void votarEnMuestraAbierta(Muestra muestra, Voto voto);
+    public abstract void votarEnMuestraExpertos(Muestra muestra, Voto voto);
     
-    public abstract void addVoto(Muestra muestra, Voto voto);
     
     public boolean hizoMasDe10EnviosEnLosUltimos30Dias(List<Muestra> muestras, Usuario usuario) {
         long cantidadDeEnviosEn30Dias = muestras.stream()
@@ -46,5 +46,7 @@ public abstract class NivelDeUsuario {
         if (obj == null) return false;
         return this.getClass() == obj.getClass();
     }
+
+
     
 }

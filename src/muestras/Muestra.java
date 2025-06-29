@@ -49,12 +49,10 @@ public class Muestra {
 	
 	//Metodos
 	
-	public void agregarVoto(Voto voto) throws Exception {
+	public void agregarVoto(Voto voto) {
 		
 		if(!haVotado(voto.getVotante())) {
 		  this.estado.agregarVoto(voto, this);
-		}else {
-			throw new Exception("El Usuario ya ha votado antes en esta muestra!!!");
 		}	 
 
 	}
@@ -62,7 +60,7 @@ public class Muestra {
 	
 	public String resultadoActual() {
 		
-		return this.estado.resultadoActual(this.votos);
+		return this.estado.resultadoActual(this);
 	}
 
 	public boolean haVotado(Usuario usuario) {
