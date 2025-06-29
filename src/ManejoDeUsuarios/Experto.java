@@ -30,7 +30,12 @@ public class Experto extends NivelDeUsuario {
 	public void votarEnMuestraExpertos(Muestra muestra, Voto voto) {
 		muestra.agregarVoto(voto);
 		if (muestra.hayOpinionCoincidenteCon(muestra.votosDeExpertos(), voto.getOpinion())) {
-			muestra.setEstado(new Verificada());
+			
+			muestra.setEstado(new Verificada());//Muestra es verificada
+			
+			//NOTIFICAR A LAS ZONAS DE COBERTURA.
+			muestra.getZonasALasQuePertenece().stream()
+											  .forEach(z -> z.notifyValidacionMuestra(z, muestra));
 		}
 	}
 	

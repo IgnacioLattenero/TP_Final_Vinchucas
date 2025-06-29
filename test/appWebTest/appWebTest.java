@@ -107,7 +107,7 @@ class appWebTest {
 	    app.agregarMuestra(muestra1);
 
 	    // Verifica que se llamó a addMuestra en la zona mockeada
-	    verify(zona).addMuestra(muestra1);
+	    verify(muestra1).agregarZona(zona);
 	}
 	
 	@Test
@@ -121,7 +121,7 @@ class appWebTest {
 	    app.agregarMuestra(muestra1);
 
 	    // Verifica que NO se llamó a addMuestra
-	    verify(zona, never()).addMuestra(muestra1);
+	    verify(muestra1, never()).agregarZona(zona);
 	}
 	
 	@Test

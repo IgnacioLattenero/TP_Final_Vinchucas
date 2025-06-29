@@ -4,10 +4,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import ManejoDeUsuarios.Basico;
+
 import ManejoDeUsuarios.Opinion;
 import ManejoDeUsuarios.Usuario;
 import ManejoDeUsuarios.Voto;
+import observer.ZonaDeCobertura;
 import unidadGeografica.Ubicacion;
 
 public class Muestra {
@@ -22,6 +23,7 @@ public class Muestra {
 	private EstadoDeMuestra estado;
 	private Ubicacion ubicacion;
 	private Opinion especie;
+	private List<ZonaDeCobertura> zonasALaQuePertenece;
 	
 	//Constructor
 	public Muestra (String foto, 
@@ -29,7 +31,8 @@ public class Muestra {
 					Usuario publicador, 
 					Voto votoDelPublicador,
 					Ubicacion ubicacion,
-					Opinion especie) throws Exception {
+					Opinion especie
+					) throws Exception {
 		
 		this.foto 		  = foto;
 		this.especie 	  = especie;
@@ -56,7 +59,10 @@ public class Muestra {
 		}	 
 
 	}
-
+	
+	public void agregarZona(ZonaDeCobertura zona) {
+		this.zonasALaQuePertenece.add(zona);
+	}
 	
 	public String resultadoActual() {
 		
@@ -118,5 +124,8 @@ public class Muestra {
 		return this.especie;
 	}
 	
+	public List<ZonaDeCobertura> getZonasALasQuePertenece(){
+		return this.zonasALaQuePertenece;
+	}
 	
 }

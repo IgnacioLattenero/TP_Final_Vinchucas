@@ -59,7 +59,7 @@ class ZonaDeCoberturaTest {
 		assertNotNull(zonaDeCoberturaSUT);
 		
 	}
-	
+	/* El metodo ya no existe
 	@Test
 	void testAgregarMuestrasYDevolverMuestrasReportadas() {
 		this.zonaDeCoberturaSUT.addMuestra(muestraMock1);
@@ -67,7 +67,7 @@ class ZonaDeCoberturaTest {
 		this.zonaDeCoberturaSUT.addMuestra(muestraMock3);
 		assertEquals(List.of(muestraMock1, muestraMock2, muestraMock3), zonaDeCoberturaSUT.muestrasReportadas());
 		
-	}
+	}*/
 	
 	@Test
 	void testZonasSolapadas() {
