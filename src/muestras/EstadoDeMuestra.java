@@ -11,9 +11,7 @@ import ManejoDeUsuarios.*;
 public abstract class EstadoDeMuestra {
 
 	public abstract void agregarVoto(Voto voto, Muestra muestra);
-	public abstract String resultadoActual(List<Voto> votos);
-	public abstract void votarEn(Voto voto, Muestra muestra);
-	public abstract void votarYVerificar(Voto voto, Muestra muestra);	
+	public abstract String resultadoActual(Muestra muestra);
 	
 	public String opinionMasVotadaEn(List<Voto> votos) {
 

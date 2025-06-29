@@ -1,11 +1,8 @@
 package ManejoDeUsuarios;
 
 import java.util.List;
-
-import muestras.AbiertaATodaOpinion;
-import muestras.EstadoDeMuestra;
 import muestras.Muestra;
-import muestras.VotanSoloExpertos;
+import muestras.Verificada;
 
 public class Especialista extends NivelDeUsuario {
 	
@@ -19,14 +16,16 @@ public class Especialista extends NivelDeUsuario {
 	}
 
 	@Override
-	public void addVoto(Muestra muestra, Voto voto) {
-		EstadoDeMuestra abiertaATodaOpinion = new AbiertaATodaOpinion();
-		EstadoDeMuestra votanSoloExpertos = new VotanSoloExpertos();
-		if(muestra.getEstado().equals(abiertaATodaOpinion)) {
-			muestra.getEstado().agregarVoto(voto, muestra);
-		} else if (muestra.getEstado().equals(votanSoloExpertos)) {
-			muestra.getEstado().votarYVerificar(voto, muestra);
-		}
+	public void votarEnMuestraAbierta(Muestra muestra, Voto voto) {
+		muestra.agregarVoto(voto);		
 	}
 
+	@Override
+	public void votarEnMuestraExpertos(Muestra muestra, Voto voto) {
+		muestra.agregarVoto(voto);
+		if (muestra.hayOpinionCoincidenteCon(muestra.votosDeExpertos(), voto.getOpinion())) {
+			muestra.setEstado(new Verificada());
+		}
+	}
+	
 }
