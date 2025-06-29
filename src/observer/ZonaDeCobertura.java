@@ -11,22 +11,22 @@ public class ZonaDeCobertura implements Subject {
 	private int 	  	   radio;
 	private String	  	   nombre;
 	private Ubicacion 	   epicentro;
-	private List<Muestra>  muestras;
+//	private List<Muestra>  muestras;
 	private List<Observer> observadores;
 	
 	public ZonaDeCobertura(int radio, String nombre, Ubicacion epicentro) {
 		this.radio 	   	  = radio;
 		this.nombre    	  = nombre;
 		this.epicentro 	  = epicentro;
-		this.muestras  	  = new ArrayList<Muestra>();
+//		this.muestras  	  = new ArrayList<Muestra>();
 		this.observadores = new ArrayList<Observer>();
 		
 	}
-	
+/*	
 	public List<Muestra> muestrasReportadas() {
 		return this.muestras;
 	}
-	
+*/	
 	public List<ZonaDeCobertura> zonasSolapadas(List<ZonaDeCobertura> zonasAEvaluar) {
 		return zonasAEvaluar.stream().filter(zona -> this.sonZonasSolapadas(this, zona)).collect(Collectors.toList());
 	}
@@ -34,11 +34,13 @@ public class ZonaDeCobertura implements Subject {
 	private boolean sonZonasSolapadas(ZonaDeCobertura zona1, ZonaDeCobertura zona2) {
 		return (zona1.epicentro.distanciaA(zona2.epicentro) < zona1.radio + zona2.radio); //distancia entre epicentros < suma de los radios 
 	}
-	
+/*	
 	public void addMuestra(Muestra muestra) {
 		this.muestras.add(muestra);
+		//NOTIFICO A LOS OBSERVADORES
+	    this.notifyAltaMuestra(this, muestra);
 	}
-
+*/
 	@Override
 	public void attachObserver(Observer observador) {
 		this.observadores.add(observador);
