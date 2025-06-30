@@ -25,9 +25,17 @@ public class Especialista extends NivelDeUsuario {
 
 		if (muestra.hayOpinionCoincidenteCon(muestra.votosDeExpertos(), voto.getOpinion())) {
 			muestra.setEstado(new Verificada());
+			
+			//NOTIFICAR A LAS ZONAS DE COBERTURA.
+			muestra.getZonasALasQuePertenece().stream()
+											  .forEach(z -> z.notifyValidacionMuestra(z, muestra));
 		}
 		
 		muestra.getVotos().add(voto);
+		
+		
+		
+		
 	}
 
 	@Override
