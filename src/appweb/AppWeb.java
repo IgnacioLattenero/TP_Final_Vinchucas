@@ -37,14 +37,14 @@ public class AppWeb {
 	
 	public void agregarMuestra(Muestra muestra) {	
 		this.muestras.add(muestra); // Agregar a la lista de muestras "registradas"
-		this.ubicarEnZonaSiCorresponde(muestra); // Agregar a zona si corresponde	
+		this.enlazarConZonaDeCoberturaSiCorresponde(muestra); // Agregar a zona si corresponde	
 		
 		//Notificar a las zonasDeCobertura
 		muestra.getZonasALasQuePertenece().stream()
 										  .forEach(z -> z.notifyAltaMuestra(z, muestra));
 	}
 		
-	public void ubicarEnZonaSiCorresponde(Muestra muestra) {
+	public void enlazarConZonaDeCoberturaSiCorresponde(Muestra muestra) {
 		// Filtra la zona (o las zonas) a la que puede pertenecer la muestra y la agrega a la muestra. 
 		// Una muestra pertenece a una zona si la distancia de su ubicacion al epicentro de la zona es menor al radio de dicha zona.
 		zonasDeCobertura.stream()
