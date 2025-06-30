@@ -57,6 +57,8 @@ class ZonaDeCoberturaTest {
 	@Test
 	void testConstructor() {
 		assertNotNull(zonaDeCoberturaSUT);
+		assertEquals(ubicacionMock1, zonaDeCoberturaSUT.getEpicentro());
+		assertEquals(10, zonaDeCoberturaSUT.getRadio());
 		
 	}
 	/* El metodo ya no existe
