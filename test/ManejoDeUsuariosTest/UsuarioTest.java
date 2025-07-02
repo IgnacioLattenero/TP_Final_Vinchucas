@@ -96,8 +96,6 @@ class UsuarioTest {
 		
 		usuario = new Usuario(basico);
 		
-		especieEsperada = mock(Opinion.class);
-		
 		
 		when(voto.getOpinion()).thenReturn(Opinion.SORDIDA);
 		when(voto.getVotante()).thenReturn(usuario);
@@ -176,11 +174,11 @@ class UsuarioTest {
             mockedStatic.when(LocalDateTime::now).thenReturn(fechaFija);
 
             // ACT
-            Voto votoGenerado = usuario.votar(opinionMock);
+            Voto votoGenerado = usuario.votar(voto.getOpinion());
 
             // ASSERT
             assertNotNull(votoGenerado, "El voto no debe ser nulo.");
-            assertEquals(opinionMock, votoGenerado.getOpinion(), "La opinión del voto debe coincidir.");
+            assertEquals(voto.getOpinion(), votoGenerado.getOpinion(), "La opinión del voto debe coincidir.");
             assertEquals(usuario, votoGenerado.getVotante(), "El votante del voto debe ser el usuario.");
             assertEquals(fechaFija, votoGenerado.getFechaEmision(), "La fecha de emisión debe ser la mockeada.");
             assertEquals(basico, votoGenerado.getNivelDelVotante(), "El nivel del votante debe ser el correcto.");
@@ -196,7 +194,7 @@ class UsuarioTest {
 	        						  usuario,
 	        						  voto,
 	        						  ubicacion,
-	        						  especieEsperada
+	        						  voto.getOpinion()
 	        );
 
 	        // ASSERT
@@ -206,7 +204,7 @@ class UsuarioTest {
 	        assertEquals("cuestionario", muestraGenerada.getCuestionario(), "cuestionario");
 	        assertEquals(usuario, muestraGenerada.getPublicador(), "usuario");
 	        assertEquals(ubicacion, muestraGenerada.getUbicacion(), "ubicacion");
-	        assertEquals(especieEsperada, muestraGenerada.getEspecie(), "especieEsperada");
+	        assertEquals(voto.getOpinion(), muestraGenerada.getEspecie(), "SORDIDA");
 	    }
 	
 }
