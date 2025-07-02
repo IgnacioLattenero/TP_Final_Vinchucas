@@ -41,5 +41,11 @@ class EspecialistaTest {
 		especialista.cambiarNivelDelUsuario(muestras, usuario);
 		assertEquals(especialista, usuario.getNivelDeUsuario());
 	}
+	
+	@Test
+	void esVotoCalificadoTest() {
+		
+		assertTrue(especialista.esVotoCalificado());
+	}
 
 }
