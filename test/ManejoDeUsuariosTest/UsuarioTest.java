@@ -98,6 +98,7 @@ class UsuarioTest {
 		
 		especieEsperada = mock(Opinion.class);
 		
+		
 		when(voto.getOpinion()).thenReturn(Opinion.SORDIDA);
 		when(voto.getVotante()).thenReturn(usuario);
 		

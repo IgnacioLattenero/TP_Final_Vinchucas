@@ -26,6 +26,13 @@ public class AppWeb {
 	}
 
 	//Metodos
+	
+	public List<Muestra> muestrasQuePertenecenA(ZonaDeCobertura zona){
+		return zona.muestrasReportadas(muestras);
+	}
+	
+	
+	
 	public void nivelarUsuarios() {
 		this.usuarios.stream().forEach(u -> u.cambiarNivelDelUsuario(muestras));
 	}

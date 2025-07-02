@@ -69,6 +69,7 @@ class muestraTest {
 		when(votoIvan.getVotante()).thenReturn(ivan);
 		when(votoIvan.getOpinion()).thenReturn(Opinion.GUASAYANA);
 		
+		when(especie.name()).thenReturn("GUASAYANA");
 		
 		muestra = new Muestra("foto", 
 							  "cuestionario", 
@@ -254,7 +255,7 @@ class muestraTest {
 	@Test
 	void getEspecieTest(){
 		
-		assertEquals(especie, muestra.getEspecie());
+		assertEquals(especie.name(), muestra.getEspecie().name());
 	}
 
 	

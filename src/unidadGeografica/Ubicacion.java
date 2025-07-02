@@ -29,7 +29,7 @@ public class Ubicacion {
 		
 	}
 	
-	public List<Ubicacion> ubicacionesEn_AMenosDe_(List<Ubicacion> ubicaciones, double distanciaKm){
+	public List<Ubicacion> ubicacionesEn_AMenosDe_(List<Ubicacion> ubicaciones, int distanciaKm){
 		
 		return ubicaciones.stream()
 						  .filter(u -> this.distanciaA(u) <= distanciaKm)
