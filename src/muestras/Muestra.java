@@ -35,7 +35,7 @@ public class Muestra {
 					) throws Exception {
 		
 		this.foto 		  = foto;
-		this.especie 	  = especie;
+		this.especie 	  = votoDelPublicador.getOpinion();
 		this.cuestionario = cuestionario;
 		this.publicador   = publicador; 
 		

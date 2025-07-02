@@ -87,6 +87,18 @@ class appWebTest {
 		
 	}
 	
+	@Test
+	void testDosMuestrasPertenecenAZona() {
+		
+		List<Muestra> resultado = new ArrayList<>();
+		resultado.add(muestra1);
+		resultado.add(muestra2);
+		
+		
+		when(zona.muestrasReportadas(muestras)).thenReturn(resultado);
+		
+		assertEquals(resultado, app.muestrasQuePertenecenA(zona));
+	}
 	
 	@Test
 	void testRealizarBusqueda() {

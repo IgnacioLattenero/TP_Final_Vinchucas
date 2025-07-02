@@ -11,22 +11,30 @@ public class ZonaDeCobertura implements Subject {
 	private int 	  	   radio;
 	private String	  	   nombre;
 	private Ubicacion 	   epicentro;
-//	private List<Muestra>  muestras;
 	private List<Observer> observadores;
 	
 	public ZonaDeCobertura(int radio, String nombre, Ubicacion epicentro) {
 		this.radio 	   	  = radio;
 		this.nombre    	  = nombre;
 		this.epicentro 	  = epicentro;
-//		this.muestras  	  = new ArrayList<Muestra>();
 		this.observadores = new ArrayList<Observer>();
 		
 	}
-/*	
-	public List<Muestra> muestrasReportadas() {
-		return this.muestras;
+	
+	public List<Muestra> muestrasReportadas(List<Muestra> muestras) {
+		return muestras.stream()
+					   .filter(m -> this.perteneceAEstaZona(m))
+					   .toList();
 	}
-*/	
+
+	public boolean perteneceAEstaZona(Muestra muestra) {
+		
+			return muestra.getZonasALasQuePertenece().stream()
+													 .anyMatch(z -> z.equals(this));
+		
+	}
+	
+	
 	public List<ZonaDeCobertura> zonasSolapadas(List<ZonaDeCobertura> zonasAEvaluar) {
 		return zonasAEvaluar.stream().filter(zona -> this.sonZonasSolapadas(this, zona)).collect(Collectors.toList());
 	}
