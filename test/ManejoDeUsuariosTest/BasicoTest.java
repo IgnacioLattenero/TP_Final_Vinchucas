@@ -1,5 +1,6 @@
 package ManejoDeUsuariosTest;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import ManejoDeUsuarios.Basico;
 import ManejoDeUsuarios.Experto; 
 import ManejoDeUsuarios.Usuario;
+import ManejoDeUsuarios.Voto;
 import muestras.Muestra;
 
 class BasicoTest {
@@ -26,6 +28,9 @@ class BasicoTest {
     
     LocalDateTime fechaActualParaTest; 
     LocalDateTime fechaDeCreacionValida; 
+    
+    Muestra muestra;
+    Voto voto;
 
     @BeforeEach
     public void setUp() throws Exception {
@@ -35,6 +40,9 @@ class BasicoTest {
         
         fechaActualParaTest = LocalDateTime.of(2025, 6, 26, 12, 0, 0); 
         fechaDeCreacionValida = fechaActualParaTest.minusDays(5); 
+        
+        muestra = mock(Muestra.class);
+        voto = mock(Voto.class);
 
         when(usuario.getNivelDeUsuario()).thenReturn(basicoSpy); 
         
@@ -113,7 +121,12 @@ class BasicoTest {
     	assertEquals(fechaActualParaTest, basicoSpy.getFechaActual());
     }
     
-    
+    @Test
+    void votarEnMuestraExpertosTest() {
+    	
+    	basicoSpy.votarEnMuestraExpertos(muestra, voto);
+    	verify(basicoSpy, times(1)).votarEnMuestraExpertos(muestra, voto);
+    }
     
     
     
