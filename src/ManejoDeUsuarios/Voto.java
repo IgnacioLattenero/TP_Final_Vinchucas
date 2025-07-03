@@ -48,7 +48,6 @@ public class Voto {
 		return this.antiguedadEnDias(LocalDateTime.now()); // Llama al nuevo método sobrecargado
 	}
 	
-	// Nuevo método sobrecargado para facilitar el testing: recibe la fecha actual
 	public long antiguedadEnDias(LocalDateTime fechaDeHoy) {
 		 /**
 	     * calcula la cantidad de días desde la emisión del voto hasta la fecha especificada
