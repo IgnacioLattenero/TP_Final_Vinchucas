@@ -37,7 +37,6 @@ public abstract class NivelDeUsuario {
         return Math.max(0, dias) <= 30;
     }
     
-    //TODO: Es necesario esto aca Nacho???
     public LocalDateTime getFechaActual() {
     	return LocalDateTime.now();
     }
